@@ -1,2 +1,56 @@
-# Trading-sentinel
-Official website of Trading Sentinel
+# Trading Sentinel — Landing Page
+
+Stack: Next.js (App Router) · TypeScript · Tailwind CSS · Framer Motion · Cloudflare Pages
+
+## Avvio locale
+
+```bash
+npm install
+npm run dev
+```
+
+## Script disponibili
+
+```bash
+npm run dev            # avvio in sviluppo
+npm run build           # build di produzione
+npm run lint             # ESLint
+npm run typecheck    # controllo tipi TypeScript (tsc --noEmit)
+npm run format          # formatta il progetto con Prettier
+npm run format:check  # verifica la formattazione senza scrivere
+```
+
+## Architettura
+
+```
+app/                  # App Router — layout, pagine, globals.css
+components/
+  ui/                 # Componenti di base (Button, Badge, Section, ...)
+  layout/             # Navbar, Footer
+  sections/            # Sezioni della landing (Hero, ProblemSection, ...) — 04.1
+  motion/             # Varianti Framer Motion condivise + RevealOnScroll
+  background/         # Ambiente 3D reale (React Three Fiber) — Canvas unico, persistente
+constants/             # Dati statici (navigazione, soglie, Controlled Stillness, ...)
+hooks/                 # Hook condivisi (useScrolled, useIsDesktop, useControlledStillness, ...)
+types/                  # Tipi TypeScript condivisi
+lib/                    # Utility (cn, rng seedato, ...)
+```
+
+## Stato sviluppo
+
+- [x] Fase 1 — Setup progetto, design system, componenti base (Button, Badge, Section, StatusIndicator, LogoMark), Navbar
+- [x] Fase 1.1 — Refactoring architetturale (constants, types, hooks, components/motion, components/background) + script typecheck/format
+- [x] Fase 2 — Hero Section (badge, titolo, sottotitolo, CTA) + ambiente 3D reale secondo la Global Technical Directive: Canvas React Three Fiber persistente, Digital Sculpture procedurale (nastri custom, nucleo emissivo), CameraRig con waypoint + Camera Presence, Controlled Stillness via scheduler seedato, qualità adattiva desktop/tablet/mobile
+- [ ] Fase 2 — Hero Section
+- [ ] Fase 3 — Sezione Problema
+- [ ] Fase 4 — Cos'è Trading Sentinel
+- [ ] Fase 5 — Come funziona
+- [ ] Fase 6 — Vantaggi / Perché Trading Sentinel
+- [ ] Fase 7 — Per chi è pensato / Pricing (Basic, Pro, Confronto)
+- [ ] Fase 8 — Free Trial / Come acquistare
+- [ ] Fase 9 — FAQ
+- [ ] Fase 10 — Footer
+- [ ] Fase 11 — Pagine legali (Risk Disclosure, Terms of Service, Privacy Policy)
+- [ ] Fase 12 — SEO, favicon, Open Graph, rifinitura performance/accessibilità
+
+Documentazione di riferimento vincolante: Fase 00–07 (congelate).
