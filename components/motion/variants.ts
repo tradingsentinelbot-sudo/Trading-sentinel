@@ -1,7 +1,8 @@
-import type { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
 
 /**
- * Varianti Framer Motion condivise tra le sezioni.
+ * Varianti Motion condivise tra le sezioni (pacchetto "motion",
+ * già "framer-motion"; stessa API, import da "motion/react").
  * Rif. Fase 04.13 — Scroll Motion (reveal, profondità, no effetti gratuiti).
  */
 

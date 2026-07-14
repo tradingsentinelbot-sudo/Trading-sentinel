@@ -15,31 +15,31 @@
     "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "@react-three/drei": "^9.114.3",
-    "@react-three/fiber": "^8.17.10",
-    "@react-three/postprocessing": "^2.16.3",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.11.17",
+    "motion": "^12.4.0",
     "lucide-react": "^0.454.0",
-    "next": "14.2.15",
+    "next": "16.2.6",
     "postprocessing": "^6.36.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tailwind-merge": "^2.5.4",
     "three": "^0.169.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "@types/three": "^0.169.0",
-    "@opennextjs/cloudflare": "^1.0.0",
+    "@opennextjs/cloudflare": "^1.20.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
-    "wrangler": "^4.15.0"
+    "wrangler": "^4.20.0"
   }
 }

@@ -27,8 +27,17 @@ npm run cf:deploy     # build + deploy su Cloudflare (wrangler deploy)
 
 Il progetto usa **`@opennextjs/cloudflare`**, l'adapter ufficialmente
 raccomandato da Cloudflare per Next.js (sostituisce `@cloudflare/next-on-pages`,
-deprecato). Deploya su Cloudflare Workers — nel dashboard Cloudflare
-convivono con "Pages" sotto l'unica sezione "Workers & Pages".
+deprecato). Deploya su Cloudflare **Workers** — non su un progetto legacy
+"Pages".
+
+⚠️ **Causa più probabile di un errore "wrangler config non valido per il
+deploy configurato"**: nel dashboard Cloudflare esistono ancora due tipi di
+progetto distinti sotto l'unica sezione "Workers & Pages" — un vecchio
+progetto **Pages** (che si aspetta una chiave `pages_build_output_dir`, non
+`main`/`assets`) e un progetto **Workers** (il nostro formato). Se la repo è
+già collegata come progetto Pages, `wrangler.jsonc` risulterà sempre
+incompatibile qualunque cosa contenga. La soluzione è creare/collegare la
+repo come progetto **Workers**, non Pages.
 
 Deploy manuale:
 
@@ -36,8 +45,8 @@ Deploy manuale:
 npm run cf:deploy
 ```
 
-Deploy automatico via Git (consigliato): collega la repo in
-**Workers & Pages → Create → Connect to Git** e imposta:
+Deploy automatico via Git (consigliato): **Workers & Pages → Create →
+Workers → Import a repository** (non "Pages → Connect to Git") e imposta:
 
 - Build command: `npm run cf:build`
 - Deploy command: `npx wrangler deploy`
@@ -67,6 +76,7 @@ lib/                    # Utility (cn, rng seedato, ...)
 - [x] Fase 1.1 — Refactoring architetturale (constants, types, hooks, components/motion, components/background) + script typecheck/format
 - [x] Fase 2 — Hero Section (badge, titolo, sottotitolo, CTA) + ambiente 3D reale secondo la Global Technical Directive: Canvas React Three Fiber persistente, Digital Sculpture procedurale (nastri custom, nucleo emissivo), CameraRig con waypoint + Camera Presence, Controlled Stillness via scheduler seedato, qualità adattiva desktop/tablet/mobile
 - [x] Fase 2.1 — Deploy Cloudflare Workers via adapter ufficiale OpenNext (`@opennextjs/cloudflare`), sostituito `@cloudflare/next-on-pages` deprecato
+- [x] Fase 2.2 — Allineamento versioni per compatibilità reale: Next.js 16.2.6, React 19, React Three Fiber 9 + drei 10 + postprocessing 3, migrazione `framer-motion` → `motion`
 - [ ] Fase 3 — Sezione Problema
 - [ ] Fase 4 — Cos'è Trading Sentinel
 - [ ] Fase 5 — Come funziona

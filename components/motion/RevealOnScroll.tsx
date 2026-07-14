@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants } from "motion/react";
 import { fadeUp } from "@/components/motion/variants";
 
 type RevealOnScrollProps = {
