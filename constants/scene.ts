@@ -43,20 +43,27 @@ export type RibbonSpec3D = {
   angle: number; // inclinazione del piano dell'orbita, radianti
   radiusA: number;
   radiusB: number;
-  twist: number; // avvolgimento lungo il nastro, radianti totali
+  twist: number; // torsione minima lungo il nastro, radianti totali
   width: number;
   driftAmplitude: number;
+  driftSpeed: number;
   seedOffset: number;
 };
 
+/**
+ * Tre elementi strutturali in simmetria radiale (120° l'uno dall'altro),
+ * stessi raggi: leggono come un'unica struttura progettata — un armillario
+ * o una turbina — non come nastri indipendenti che si intrecciano a caso.
+ * Larghezza sostanziale e costante, torsione minima, movimento lento e
+ * di ampiezza contenuta: massa percepita, non nervosismo organico.
+ */
 export const RIBBONS_3D: RibbonSpec3D[] = [
-  { angle: 0.21, radiusA: 0.85, radiusB: 0.4, twist: Math.PI * 1.4, width: 0.05, driftAmplitude: 0.05, seedOffset: 0 },
-  { angle: 1.15, radiusA: 0.78, radiusB: 0.52, twist: Math.PI * 1.1, width: 0.045, driftAmplitude: 0.045, seedOffset: 7.2 },
-  { angle: 2.05, radiusA: 0.9, radiusB: 0.34, twist: Math.PI * 1.65, width: 0.04, driftAmplitude: 0.06, seedOffset: 14.9 },
-  { angle: 2.75, radiusA: 0.72, radiusB: 0.48, twist: Math.PI * 0.9, width: 0.048, driftAmplitude: 0.04, seedOffset: 21.4 },
+  { angle: 0, radiusA: 0.86, radiusB: 0.42, twist: Math.PI * 0.18, width: 0.16, driftAmplitude: 0.014, driftSpeed: 0.35, seedOffset: 0 },
+  { angle: (Math.PI * 2) / 3, radiusA: 0.86, radiusB: 0.44, twist: Math.PI * 0.22, width: 0.17, driftAmplitude: 0.012, driftSpeed: 0.3, seedOffset: 7.2 },
+  { angle: (Math.PI * 4) / 3, radiusA: 0.84, radiusB: 0.4, twist: Math.PI * 0.2, width: 0.165, driftAmplitude: 0.013, driftSpeed: 0.32, seedOffset: 14.9 },
 ];
 
-export const CORE_RADIUS = 0.09;
+export const CORE_RADIUS = 0.15;
 
 export type QualityTier = "desktop" | "tablet" | "mobile";
 

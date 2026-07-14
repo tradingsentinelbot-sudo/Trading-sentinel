@@ -3,14 +3,13 @@ import * as THREE from "three";
 /**
  * buildRibbonGeometry — costruisce una superficie a nastro (non un tubo).
  *
- * Il percorso centrale è una curva tipo Lissajous su un piano inclinato.
- * A differenza di una TubeGeometry (sezione circolare costante), qui si
- * genera una striscia a sezione rettangolare la cui larghezza varia lungo
- * il percorso e che ruota progressivamente attorno al proprio asse (twist),
- * così la superficie si "attorciglia" nello spazio invece di sembrare un
- * condotto. Una micro-irregolarità deterministica (somma di seni, non
- * rumore casuale) viene applicata ai vertici per evitare una superficie
- * troppo perfetta.
+ * Il percorso centrale è una curva su un piano inclinato. A differenza di
+ * una TubeGeometry (sezione circolare costante), qui si genera una striscia
+ * a sezione rettangolare che ruota progressivamente attorno al proprio asse
+ * (twist minimo, solo per far catturare la luce ai bordi) — larghezza
+ * costante lungo tutto il percorso: un elemento strutturale, non
+ * un'appendice che si assottiglia. Nessuna irregolarità superficiale:
+ * la superficie deve leggersi come progettata, non come cresciuta.
  */
 export function buildRibbonGeometry(params: {
   radiusA: number;
@@ -40,18 +39,9 @@ export function buildRibbonGeometry(params: {
     return v;
   };
 
-  const microDisplace = (u: number) => {
-    // Irregolarità deterministica, non rumore casuale.
-    return (
-      Math.sin(u * 37 + seedOffset * 3) * 0.006 +
-      Math.sin(u * 71 + seedOffset * 5) * 0.003
-    );
-  };
-
-  const widthAt = (u: number) => {
-    // La larghezza respira lievemente lungo il percorso.
-    return width * (0.7 + 0.3 * Math.sin(u * Math.PI * 4 + seedOffset));
-  };
+  // Larghezza costante lungo tutto il percorso: un elemento strutturale,
+  // non un'appendice che si assottiglia verso le estremità.
+  const widthAt = () => width;
 
   for (let i = 0; i <= segments; i++) {
     const u = i / segments;
@@ -72,11 +62,10 @@ export function buildRibbonGeometry(params: {
     side.applyQuaternion(twistQuat);
     up.applyQuaternion(twistQuat);
 
-    const w = widthAt(u) / 2;
-    const disp = microDisplace(u);
+    const w = widthAt() / 2;
 
-    const left = p0.clone().addScaledVector(side, -w).addScaledVector(up, disp);
-    const right = p0.clone().addScaledVector(side, w).addScaledVector(up, disp);
+    const left = p0.clone().addScaledVector(side, -w);
+    const right = p0.clone().addScaledVector(side, w);
 
     positions.push(left.x, left.y, left.z);
     positions.push(right.x, right.y, right.z);

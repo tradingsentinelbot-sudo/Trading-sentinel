@@ -50,30 +50,31 @@ function Ribbon({
     if (!groupRef.current) return;
     const t = state.clock.elapsedTime;
 
-    // Deriva ambientale quasi impercettibile, mai sincronizzata tra i nastri.
-    const driftRot = wander(t, spec.seedOffset, spec.driftAmplitude);
-    const realignBoost = isRealign ? 0.06 : 0;
+    // Deriva ambientale minima e lenta: massa che si assesta, non parti
+    // che si agitano — ogni nastro ha una propria velocità (mai sincronizzate).
+    const driftRot = wander(t, spec.seedOffset, spec.driftAmplitude, spec.driftSpeed);
+    const realignBoost = isRealign ? 0.02 : 0;
 
     groupRef.current.rotation.z = THREE.MathUtils.lerp(
       groupRef.current.rotation.z,
       driftRot + realignBoost,
-      0.04
+      0.025
     );
 
     if (materialRef.current) {
-      const targetTransmission = isRefraction ? 0.55 : 0.92;
-      const targetOpacity = isRefraction ? 0.85 : 0.65;
+      const targetTransmission = isRefraction ? 0.62 : 0.82;
+      const targetOpacity = isRefraction ? 0.9 : 0.78;
       if ("transmission" in materialRef.current) {
         materialRef.current.transmission = THREE.MathUtils.lerp(
-          materialRef.current.transmission ?? 0.9,
+          materialRef.current.transmission ?? 0.82,
           targetTransmission,
-          0.06
+          0.05
         );
       }
       materialRef.current.opacity = THREE.MathUtils.lerp(
-        materialRef.current.opacity ?? 0.7,
+        materialRef.current.opacity ?? 0.78,
         targetOpacity,
-        0.06
+        0.05
       );
     }
   });
@@ -84,25 +85,25 @@ function Ribbon({
         {useTransmission ? (
           <MeshTransmissionMaterial
             ref={materialRef}
-            transmission={0.9}
-            thickness={0.15}
-            roughness={0.12}
-            chromaticAberration={0.02}
-            ior={1.15}
+            transmission={0.82}
+            thickness={0.4}
+            roughness={0.14}
+            chromaticAberration={0.006}
+            ior={1.3}
             color={AMBIENT_LIGHT_ORIGIN.colorSoft}
             attenuationColor={AMBIENT_LIGHT_ORIGIN.color}
-            attenuationDistance={0.6}
+            attenuationDistance={0.5}
             transparent
-            opacity={0.7}
+            opacity={0.78}
           />
         ) : (
           <meshPhysicalMaterial
             ref={materialRef}
             color={AMBIENT_LIGHT_ORIGIN.colorSoft}
-            roughness={0.25}
-            metalness={0.1}
+            roughness={0.18}
+            metalness={0.22}
             transparent
-            opacity={0.55}
+            opacity={0.85}
           />
         )}
       </mesh>
@@ -112,6 +113,8 @@ function Ribbon({
 
 /**
  * DigitalSculpture3D — l'entità proprietaria della Hero come oggetto 3D reale.
+ * Tre elementi strutturali in simmetria radiale attorno a un nucleo
+ * energetico: massa percepita, precisione, controllo — non un organismo.
  * Rif. Global Technical Directive — punto 5, Global Creative Direction.
  */
 export function DigitalSculpture3D({ tier }: { tier: QualityTier }) {
@@ -126,14 +129,15 @@ export function DigitalSculpture3D({ tier }: { tier: QualityTier }) {
   const coreMatRef = useRef<THREE.MeshStandardMaterial>(null);
 
   useFrame((state) => {
-    // Il nucleo respira: unica presenza costante, periodo lungo e non fisso
-    // nel senso percettivo (16s), variazione minima di intensità/scala.
+    // Il nucleo respira: unica presenza costante, periodo lungo (20s),
+    // variazione contenuta — centro energetico di una struttura pesante,
+    // non un indicatore che lampeggia.
     const t = state.clock.elapsedTime;
-    const breath = (Math.sin((t / 16) * Math.PI * 2) + 1) / 2; // 0..1
-    const scale = 1 + breath * 0.08;
+    const breath = (Math.sin((t / 20) * Math.PI * 2) + 1) / 2; // 0..1
+    const scale = 1 + breath * 0.05;
     if (coreRef.current) coreRef.current.scale.setScalar(scale);
     if (coreMatRef.current) {
-      coreMatRef.current.emissiveIntensity = 1.1 + breath * 0.5;
+      coreMatRef.current.emissiveIntensity = 1.3 + breath * 0.35;
     }
   });
 

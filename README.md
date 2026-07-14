@@ -45,11 +45,23 @@ Deploy manuale:
 npm run cf:deploy
 ```
 
-Deploy automatico via Git (consigliato): **Workers & Pages → Create →
-Workers → Import a repository** (non "Pages → Connect to Git") e imposta:
+Deploy automatico via Git: **Workers & Pages → Create → Workers → Import a
+repository**, poi imposta un **unico comando di deploy** (non separare Build
+e Deploy command in due passaggi):
 
-- Build command: `npm run cf:build`
-- Deploy command: `npx wrangler deploy`
+- Deploy command: `npm run cf:deploy`
+- Build command: lascia vuoto/default
+
+⚠️ Non usare `npx wrangler deploy` come deploy command separato da un build
+command precedente: è un bug noto e documentato della combinazione
+Wrangler↔OpenNext (Wrangler rileva il progetto OpenNext e richiama
+internamente `opennextjs-cloudflare deploy` in un contesto che non trova più
+la configurazione compilata dal passaggio di build precedente — vedi
+[cloudflare/workers-sdk#13134](https://github.com/cloudflare/workers-sdk/issues/13134),
+[#11729](https://github.com/cloudflare/workers-sdk/issues/11729),
+[opennextjs-cloudflare#1102](https://github.com/opennextjs/opennextjs-cloudflare/issues/1102)).
+Eseguire build e deploy come un unico comando (`npm run cf:deploy`) evita il
+problema alla radice.
 
 File di configurazione coinvolti: `wrangler.jsonc`, `open-next.config.ts`.
 Nessun passaggio manuale successivo al deploy da Git è richiesto.
@@ -71,6 +83,8 @@ lib/                    # Utility (cn, rng seedato, ...)
 ```
 
 ## Stato sviluppo
+
+- [x] Fase 2.3 — Rifinitura direzione artistica Digital Sculpture: da 4 nastri sottili/irregolari a 3 elementi strutturali in simmetria radiale, larghezza costante (niente più assottigliamento), twist minimo, superficie pulita, deriva più lenta e contenuta, nucleo più grande — massa percepita e controllo, non organismo
 
 - [x] Fase 1 — Setup progetto, design system, componenti base (Button, Badge, Section, StatusIndicator, LogoMark), Navbar
 - [x] Fase 1.1 — Refactoring architetturale (constants, types, hooks, components/motion, components/background) + script typecheck/format
