@@ -40,60 +40,73 @@ export const CAMERA_PRESENCE = {
 export const SCULPTURE_WORLD_POSITION: [number, number, number] = [0.55, 0, 0];
 
 /**
- * Il Monolite: un solido geometrico sfaccettato (non un nastro, non un
- * organismo). Presenza monumentale, massa percepita, struttura annidata
- * leggibile — guscio esterno + nucleo interno più piccolo e ruotato,
- * visibile in trasparenza, come richiesto dal riferimento approvato.
+ * Il Cubo: replica fedele della geometria e del contesto dell'immagine di
+ * riferimento approvata. Cubo esterno traslucido + cubo interno annidato,
+ * stessa orientazione (nessuna rotazione reciproca), nucleo di luce al
+ * centro. Poggia su un piedistallo a lastre impilate e leggermente
+ * sfalsate.
  */
-export const CRYSTAL = {
-  outerRadius: 0.62,
-  outerDetail: 0,
-  outerStretchY: 1.4,
-  outerTaper: 0.68,
-  innerRadius: 0.3,
-  innerDetail: 0,
-  innerStretchY: 1.25,
-  innerTaper: 0.6,
-  innerRotationY: Math.PI / 5, // ruotato rispetto al guscio esterno: struttura visibile, non identica
+export const CUBE = {
+  outerSize: 0.92,
+  innerSize: 0.42,
 };
 
-export const CORE_RADIUS = 0.1;
+export const CORE_RADIUS = 0.06;
 
 /**
- * Altezza della base del Monolite rispetto al proprio centro geometrico.
- * L'icosaedro ha vertici a distanza `radius` dal centro; dopo `stretchY`
- * il vertice più basso è a `-radius * stretchY`: è lì che deve poggiare
- * il piano di base, non a metà (altrimenti il piano attraverserebbe il
- * solido invece di sostenerlo).
+ * Piedistallo: lastre scure impilate, ciascuna leggermente più grande e
+ * ruotata rispetto alla successiva, come nel riferimento.
  */
-export const CRYSTAL_GROUND_OFFSET = CRYSTAL.outerRadius * CRYSTAL.outerStretchY;
+export type PlinthLayer = {
+  size: number;
+  height: number;
+  rotationY: number;
+  yOffset: number;
+};
+
+export const PLINTH_LAYERS: PlinthLayer[] = [
+  { size: 1.9, height: 0.05, rotationY: 0, yOffset: 0 },
+  { size: 1.55, height: 0.055, rotationY: 0.07, yOffset: 0.05 },
+  { size: 1.25, height: 0.06, rotationY: -0.05, yOffset: 0.105 },
+];
+
+/** Altezza totale del piedistallo: qui poggia la base del cubo. */
+export const PLINTH_TOP_Y =
+  PLINTH_LAYERS.reduce((max, l) => Math.max(max, l.yOffset + l.height), 0);
 
 /**
- * Condotti di energia: linee che si irradiano dalla base sul "pavimento"
- * (infrastruttura, non tentacoli — direzione unica, nessun movimento
- * indipendente) e fasci sottili che scendono dall'alto verso il monolite.
- * Rif. immagine di riferimento approvata.
+ * Fasci verticali densi che scendono dall'alto e convergono sulla sommità
+ * del cubo — replica del "flusso di dati" del riferimento.
  */
-export const BASE_CONDUITS_COUNT = 6;
-export const BASE_CONDUIT_RADIUS = 2.4;
-export const DESCENDING_BEAMS_COUNT = 5;
-export const DESCENDING_BEAM_HEIGHT = 2.2;
-export const DESCENDING_BEAM_SCATTER = 0.34;
+export const DESCENDING_BEAMS_COUNT = 18;
+export const DESCENDING_BEAM_HEIGHT = 3.2;
+export const DESCENDING_BEAM_SCATTER = 0.5;
+
+/**
+ * Condotti alla base: non linee singole, ma fasci di 5 filamenti paralleli
+ * con andamento a curva morbida (non radiale rigido), in 4 direzioni come
+ * nel riferimento. Ogni fascio porta alcuni punti di luce (sparkle) fissi
+ * lungo il percorso.
+ */
+export const BASE_CONDUIT_DIRECTIONS = 4;
+export const BASE_CONDUIT_STRANDS_PER_BUNDLE = 5;
+export const BASE_CONDUIT_LENGTH = 3.4;
+export const BASE_CONDUIT_SPARKLES_PER_STRAND = 4;
 
 export type QualityTier = "desktop" | "tablet" | "mobile";
 
 export const TIER_SETTINGS: Record<
   QualityTier,
   {
-    crystalDetail: number;
     dpr: [number, number];
     transmissionMaterial: boolean;
     postProcessing: boolean;
     pointerParallax: boolean;
     reflectiveGround: boolean;
+    beamCount: number;
   }
 > = {
-  desktop: { crystalDetail: 1, dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true, reflectiveGround: true },
-  tablet: { crystalDetail: 0, dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false, reflectiveGround: true },
-  mobile: { crystalDetail: 0, dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false, reflectiveGround: false },
+  desktop: { dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true, reflectiveGround: true, beamCount: DESCENDING_BEAMS_COUNT },
+  tablet: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false, reflectiveGround: true, beamCount: 12 },
+  mobile: { dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false, reflectiveGround: false, beamCount: 8 },
 };
