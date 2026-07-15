@@ -84,6 +84,8 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] Fase 2.4 — Digital Sculpture riscritta da zero come **Monolite**: solido geometrico sfaccettato (guscio esterno + nucleo interno annidato), base riflettente, condotti di energia (fasci discendenti + condotti radiali), zero movimento della geometria. Abbandonato definitivamente il sistema a nastri (linea progettuale bocciata: leggeva "organismo/tentacolare" invece di "manufatto tecnologico"). Basato su analisi di un'immagine di riferimento approvata come nuova base artistica del progetto.
+
 - [x] Fase 2.3 — Rifinitura direzione artistica Digital Sculpture: da 4 nastri sottili/irregolari a 3 elementi strutturali in simmetria radiale, larghezza costante (niente più assottigliamento), twist minimo, superficie pulita, deriva più lenta e contenuta, nucleo più grande — massa percepita e controllo, non organismo
 
 - [x] Fase 1 — Setup progetto, design system, componenti base (Button, Badge, Section, StatusIndicator, LogoMark), Navbar

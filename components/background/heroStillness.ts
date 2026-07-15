@@ -1,18 +1,18 @@
 import { mulberry32, randomBetween, pickIndex } from "@/lib/rng";
 import { STILLNESS } from "@/constants/stillness";
 
-export type StillnessEventType = "realign" | "refraction" | "intersection-glow";
+export type StillnessEventType = "facet-glow" | "conduit-pulse" | "beam-flicker";
 
 export type StillnessEvent = {
   id: number;
   type: StillnessEventType;
-  targetIndex: number; // quale nastro/intersezione è coinvolto
+  targetIndex: number; // quale faccia/condotto/fascio è coinvolto
   atMs: number; // istante di inizio, relativo all'avvio dello scheduler
   durationMs: number;
   intensity: number;
 };
 
-const EVENT_TYPES: StillnessEventType[] = ["realign", "refraction", "intersection-glow"];
+const EVENT_TYPES: StillnessEventType[] = ["facet-glow", "conduit-pulse", "beam-flicker"];
 
 /**
  * Genera un batch di eventi pianificati in anticipo, a partire da un seed.
