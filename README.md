@@ -84,6 +84,8 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] Fase 2B / Step 1 — Materiali (Keystone Compresso): geometria minima a masse compresse (base PVD + 2 masse intermedie spazzolate) come supporto necessario, vuoto controllato in vetro segmentato per massa, principio attivo (emissione interna) confinato al taglio. Sostituisce l'archetipo Cubo (linea abbandonata in sede di art direction). Illuminazione, camera, rendering, post-processing, densità dell'aria, composizione, movimento: non toccati.
+
 - [x] Fase 2.5 — Digital Sculpture riscritta come **replica fedele** dell'immagine di riferimento approvata: cubo esterno + cubo interno annidato (stessa orientazione, non ruotato), piedistallo a 3 lastre impilate e sfalsate, 18 fasci verticali densi dall'alto, 4 fasci di condotti curvi alla base (5 filamenti ciascuno + punti sparkle). Sostituisce sia il sistema a nastri sia il Monolite astratto (entrambi abbandonati).
 
 - [x] Fase 2.4 — Digital Sculpture riscritta da zero come **Monolite**: solido geometrico sfaccettato (guscio esterno + nucleo interno annidato), base riflettente, condotti di energia (fasci discendenti + condotti radiali), zero movimento della geometria. Abbandonato definitivamente il sistema a nastri (linea progettuale bocciata: leggeva "organismo/tentacolare" invece di "manufatto tecnologico"). Basato su analisi di un'immagine di riferimento approvata come nuova base artistica del progetto.

@@ -40,58 +40,48 @@ export const CAMERA_PRESENCE = {
 export const SCULPTURE_WORLD_POSITION: [number, number, number] = [0.55, 0, 0];
 
 /**
- * Il Cubo: replica fedele della geometria e del contesto dell'immagine di
- * riferimento approvata. Cubo esterno traslucido + cubo interno annidato,
- * stessa orientazione (nessuna rotazione reciproca), nucleo di luce al
- * centro. Poggia su un piedistallo a lastre impilate e leggermente
- * sfalsate.
+ * Keystone Compresso — masse rettilinee compresse verso un asse centrale,
+ * base continua con la massa principale (nessuna giunzione visibile tra
+ * "artefatto" e "piedistallo": sono la stessa entità). Rif. Bible
+ * concettuale approvata (FASE 2B).
+ *
+ * Ogni massa è divisa in due metà lungo X, separate da CUT_GAP: è lì che
+ * passa l'unico vuoto controllato dell'artefatto.
+ *
+ * Le proporzioni esatte (compressione, rastremazione) sono un primo
+ * assestamento: la taratura fine di composizione/scala è materia dello
+ * step "Composizione", non di questo step.
  */
-export const CUBE = {
-  outerSize: 0.92,
-  innerSize: 0.42,
-};
-
-export const CORE_RADIUS = 0.06;
-
-/**
- * Piedistallo: lastre scure impilate, ciascuna leggermente più grande e
- * ruotata rispetto alla successiva, come nel riferimento.
- */
-export type PlinthLayer = {
-  size: number;
+export type MassSpec = {
+  width: number;
   height: number;
-  rotationY: number;
-  yOffset: number;
+  depth: number;
+  yBase: number;
+  material: "pvd" | "brushed";
+  brushDirection?: number; // radianti, direzione della spazzolatura (solo "brushed")
 };
 
-export const PLINTH_LAYERS: PlinthLayer[] = [
-  { size: 1.9, height: 0.05, rotationY: 0, yOffset: 0 },
-  { size: 1.55, height: 0.055, rotationY: 0.07, yOffset: 0.05 },
-  { size: 1.25, height: 0.06, rotationY: -0.05, yOffset: 0.105 },
+export const KEYSTONE_MASSES: MassSpec[] = [
+  { width: 1.3, height: 0.36, depth: 1.05, yBase: 0, material: "pvd" },
+  { width: 0.95, height: 0.4, depth: 0.8, yBase: 0.36, material: "brushed", brushDirection: 0 },
+  { width: 0.64, height: 0.42, depth: 0.56, yBase: 0.76, material: "brushed", brushDirection: Math.PI / 2 },
 ];
 
-/** Altezza totale del piedistallo: qui poggia la base del cubo. */
-export const PLINTH_TOP_Y =
-  PLINTH_LAYERS.reduce((max, l) => Math.max(max, l.yOffset + l.height), 0);
+export const KEYSTONE_TOTAL_HEIGHT = KEYSTONE_MASSES.reduce(
+  (h, m) => Math.max(h, m.yBase + m.height),
+  0
+);
+
+/** Larghezza del vuoto controllato che attraversa le masse. */
+export const CUT_GAP = 0.055;
 
 /**
- * Fasci verticali densi che scendono dall'alto e convergono sulla sommità
- * del cubo — replica del "flusso di dati" del riferimento.
+ * Il principio attivo (emissione interna): una regione concentrata al
+ * centro del taglio, non l'intera sua estensione — un nucleo, non una
+ * superficie che si illumina per intero.
  */
-export const DESCENDING_BEAMS_COUNT = 18;
-export const DESCENDING_BEAM_HEIGHT = 3.2;
-export const DESCENDING_BEAM_SCATTER = 0.5;
-
-/**
- * Condotti alla base: non linee singole, ma fasci di 5 filamenti paralleli
- * con andamento a curva morbida (non radiale rigido), in 4 direzioni come
- * nel riferimento. Ogni fascio porta alcuni punti di luce (sparkle) fissi
- * lungo il percorso.
- */
-export const BASE_CONDUIT_DIRECTIONS = 4;
-export const BASE_CONDUIT_STRANDS_PER_BUNDLE = 5;
-export const BASE_CONDUIT_LENGTH = 3.4;
-export const BASE_CONDUIT_SPARKLES_PER_STRAND = 4;
+export const CORE_HEIGHT_RATIO = 0.42; // percentuale dell'altezza totale del taglio
+export const CORE_RADIUS = 0.05;
 
 export type QualityTier = "desktop" | "tablet" | "mobile";
 
@@ -102,11 +92,9 @@ export const TIER_SETTINGS: Record<
     transmissionMaterial: boolean;
     postProcessing: boolean;
     pointerParallax: boolean;
-    reflectiveGround: boolean;
-    beamCount: number;
   }
 > = {
-  desktop: { dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true, reflectiveGround: true, beamCount: DESCENDING_BEAMS_COUNT },
-  tablet: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false, reflectiveGround: true, beamCount: 12 },
-  mobile: { dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false, reflectiveGround: false, beamCount: 8 },
+  desktop: { dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true },
+  tablet: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false },
+  mobile: { dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false },
 };

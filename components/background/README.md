@@ -1,22 +1,19 @@
 # components/background
 
 Ambiente 3D reale del sito (Global Technical Directive). Canvas WebGL
-persistente, montato una volta in `app/layout.tsx`.
+persistente, montato una volta in `app/layout.tsx`. Architettura tecnica
+congelata come baseline ("build sculpture 3d") — vedi FASE 2B.
 
-- `SceneCanvasClientOnly.tsx` — wrapper `next/dynamic(ssr:false)`.
-- `SceneCanvas.tsx` — `<Canvas>`, luci, fog, Environment, post-processing
-  per tier.
-- `CameraRig.tsx` — waypoint di camera + Camera Presence. Approvato, non
-  toccare senza richiesta esplicita.
-- `DigitalSculpture3D.tsx` — replica fedele dell'immagine di riferimento
-  approvata: cubo esterno + cubo interno annidato (stessa orientazione),
-  piedistallo a lastre impilate e sfalsate, fasci verticali densi dall'alto,
-  4 fasci di condotti curvi alla base (ciascuno 5 filamenti + sparkle
-  lungo il percorso). Sostituisce sia il precedente sistema a nastri sia
-  il Monolite sfaccettato astratto (entrambe linee progettuali abbandonate).
-- `heroStillness.ts` — generatore di batch di micro-eventi (facce che si
-  illuminano, fasci di condotti/raggi che pulsano), seedato.
+- `SceneCanvasClientOnly.tsx` — wrapper `next/dynamic(ssr:false)`. Non toccato.
+- `SceneCanvas.tsx` — `<Canvas>`, luci, fog, Environment, post-processing.
+  Non toccato in questo step (Materiali).
+- `CameraRig.tsx` — waypoint di camera + Camera Presence. Non toccato.
+- `DigitalSculpture3D.tsx` — **Digital Sculpture, Step 1 (Materiali)**:
+  Keystone Compresso, gerarchia materica secondo la Bible concettuale
+  (PVD nero / metallo spazzolato / vetro limitato al taglio / principio
+  attivo confinato). Sostituisce l'archetipo Cubo.
+- `heroStillness.ts` — generatore di batch Controlled Stillness. Non
+  toccato (stessi tipi di evento, wiring nel componente aggiornato solo
+  dove necessario dopo la rimozione della vecchia geometria).
 
-Nessuna chiamata `Math.random()` a runtime: variazioni sempre pianificate
-in batch o generate da funzioni deterministiche del tempo
-(`lib/wander.ts`, `lib/rng.ts`).
+Nessuna chiamata `Math.random()` a runtime.
