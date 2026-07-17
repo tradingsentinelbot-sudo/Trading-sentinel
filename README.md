@@ -84,6 +84,8 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] Fase 2B / Geometria — Implementato **Approccio A**: frattura procedurale via CSG (`three-bvh-csg`), seed fisso, nessun `Math.random()` a runtime. `FracturedCrystal.tsx` sostituisce i box semplici con lamine reali ottenute da intersezione booleana con l'inviluppo del cristallo. Aggiornato `three` a `^0.180.0` (richiesto da `three-bvh-csg`). Illuminazione, camera, atmosfera, post-processing, animazioni: non toccati.
+
 - [x] Fase 2B / Fix — Corretto bug di illuminazione mobile (mancava luce indiretta senza Environment: metalli quasi invisibili). Aggiunta `hemisphereLight` economica in `SceneCanvas.tsx`, valida per tutti i tier.
 - [x] Fase 2B / Confronto — Ricostruita la variante **Cubo di vetro** (`CubeSculpture.tsx`) fedele allo screenshot di riferimento, affiancata al Keystone Compresso tramite toggle (`ACTIVE_SCULPTURE` in `constants/scene.ts`). Attualmente attiva: **cube**.
 

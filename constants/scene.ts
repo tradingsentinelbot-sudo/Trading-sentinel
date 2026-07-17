@@ -86,12 +86,40 @@ export const CORE_RADIUS = 0.05;
 export type QualityTier = "desktop" | "tablet" | "mobile";
 
 /**
+ * Frattura procedurale del cristallo (Approccio A, approvato).
+ * Seed fisso, nessun Math.random() a runtime: la lista di lamine viene
+ * generata una sola volta da una distribuzione deterministica (spirale
+ * aurea per le normali + jitter seedato entro limiti stretti) e poi
+ * tagliata via CSG dentro l'inviluppo — mai ricalcolata per frame.
+ */
+export const FRACTURE_SEED = 133742;
+
+export const FRACTURE_ENVELOPE = {
+  width: 1.05,
+  height: 1.25,
+  depth: 0.95,
+};
+
+/** Numero di lamine per tier — meno lamine = meno operazioni CSG (costose in build, mai a runtime). */
+export const FRACTURE_SHARD_COUNT: Record<QualityTier, number> = {
+  desktop: 26,
+  tablet: 18,
+  mobile: 12,
+};
+
+export const FRACTURE_THICKNESS_RANGE: [number, number] = [0.05, 0.15];
+/** Distanza delle lamine dal centro, come frazione del raggio dell'inviluppo. */
+export const FRACTURE_OFFSET_RANGE: [number, number] = [0.08, 0.85];
+/** Jitter angolare massimo applicato alla normale deterministica (radianti). */
+export const FRACTURE_ANGLE_JITTER = 0.35;
+
+/**
  * Toggle temporaneo per confrontare direttamente le due varianti della
  * Digital Sculpture in build reale. "cube" = ricostruzione fedele dello
  * screenshot di riferimento; "keystone" = concept Keystone Compresso.
  */
-export type SculptureVariant = "keystone" | "cube";
-export const ACTIVE_SCULPTURE: SculptureVariant = "cube";
+export type SculptureVariant = "keystone" | "cube" | "fracture";
+export const ACTIVE_SCULPTURE: SculptureVariant = "fracture";
 
 export const TIER_SETTINGS: Record<
   QualityTier,
