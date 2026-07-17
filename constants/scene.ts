@@ -91,7 +91,7 @@ export type QualityTier = "desktop" | "tablet" | "mobile";
  * screenshot di riferimento; "keystone" = concept Keystone Compresso.
  */
 export type SculptureVariant = "keystone" | "cube";
-export const ACTIVE_SCULPTURE: SculptureVariant = "keystone";
+export const ACTIVE_SCULPTURE: SculptureVariant = "cube";
 
 export const TIER_SETTINGS: Record<
   QualityTier,
