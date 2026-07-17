@@ -84,6 +84,9 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] Fase 2B / Fix — Corretto bug di illuminazione mobile (mancava luce indiretta senza Environment: metalli quasi invisibili). Aggiunta `hemisphereLight` economica in `SceneCanvas.tsx`, valida per tutti i tier.
+- [x] Fase 2B / Confronto — Ricostruita la variante **Cubo di vetro** (`CubeSculpture.tsx`) fedele allo screenshot di riferimento, affiancata al Keystone Compresso tramite toggle (`ACTIVE_SCULPTURE` in `constants/scene.ts`). Attualmente attiva: **cube**.
+
 - [x] Fase 2B / Step 1 — Materiali (Keystone Compresso): geometria minima a masse compresse (base PVD + 2 masse intermedie spazzolate) come supporto necessario, vuoto controllato in vetro segmentato per massa, principio attivo (emissione interna) confinato al taglio. Sostituisce l'archetipo Cubo (linea abbandonata in sede di art direction). Illuminazione, camera, rendering, post-processing, densità dell'aria, composizione, movimento: non toccati.
 
 - [x] Fase 2.5 — Digital Sculpture riscritta come **replica fedele** dell'immagine di riferimento approvata: cubo esterno + cubo interno annidato (stessa orientazione, non ruotato), piedistallo a 3 lastre impilate e sfalsate, 18 fasci verticali densi dall'alto, 4 fasci di condotti curvi alla base (5 filamenti ciascuno + punti sparkle). Sostituisce sia il sistema a nastri sia il Monolite astratto (entrambi abbandonati).

@@ -85,6 +85,14 @@ export const CORE_RADIUS = 0.05;
 
 export type QualityTier = "desktop" | "tablet" | "mobile";
 
+/**
+ * Toggle temporaneo per confrontare direttamente le due varianti della
+ * Digital Sculpture in build reale. "cube" = ricostruzione fedele dello
+ * screenshot di riferimento; "keystone" = concept Keystone Compresso.
+ */
+export type SculptureVariant = "keystone" | "cube";
+export const ACTIVE_SCULPTURE: SculptureVariant = "keystone";
+
 export const TIER_SETTINGS: Record<
   QualityTier,
   {

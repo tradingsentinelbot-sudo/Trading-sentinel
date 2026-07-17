@@ -45,6 +45,7 @@ export function SceneCanvas() {
         <fog attach="fog" args={["#0A0B0D", 4, 9]} />
 
         <ambientLight intensity={0.25} />
+        <hemisphereLight args={["#3D7DFA", "#0A0B0D", 0.55]} />
         <directionalLight position={[2, 3, 2]} intensity={0.8} color="#EAF1FF" />
         <directionalLight position={[-2, -1, -1.5]} intensity={0.25} color={"#3D7DFA"} />
 
