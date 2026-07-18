@@ -84,6 +84,9 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] Fix (hardening, causa non confermata) — Aggiunto `public/.assetsignore` (esclude `.ts`/`.tsx`/`.map`/`.d.ts` dagli asset Cloudflare caricati da Wrangler), script `scripts/ensure-assetsignore.js` eseguito dopo ogni `cf:build` (copia l'ignore file + scansiona `.open-next/assets` per file sospetti e li segnala in console), `productionBrowserSourceMaps: false` esplicito in `next.config.js`. **Non verificato**: non è stato possibile eseguire una build reale in questo ambiente (nessun accesso di rete). Da confermare al prossimo deploy controllando l'output dello script.
+- [x] Geometria — Approccio A v2: struttura a famiglie deterministiche (massa centrale sugli assi dell'inviluppo + famiglie di lamine diagonali ripetute) al posto della distribuzione uniforme sulla sfera. **Non verificato visivamente**, solo verificato a livello di codice.
+
 - [x] Fase 2B / Geometria — Implementato **Approccio A**: frattura procedurale via CSG (`three-bvh-csg`), seed fisso, nessun `Math.random()` a runtime. `FracturedCrystal.tsx` sostituisce i box semplici con lamine reali ottenute da intersezione booleana con l'inviluppo del cristallo. Aggiornato `three` a `^0.180.0` (richiesto da `three-bvh-csg`). Illuminazione, camera, atmosfera, post-processing, animazioni: non toccati.
 
 - [x] Fase 2B / Fix — Corretto bug di illuminazione mobile (mancava luce indiretta senza Environment: metalli quasi invisibili). Aggiunta `hemisphereLight` economica in `SceneCanvas.tsx`, valida per tutti i tier.

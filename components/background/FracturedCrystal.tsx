@@ -5,52 +5,50 @@ import { useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, MeshReflectorMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { generateShardSpecs } from "@/components/background/crystalFracture";
-import { buildFracturedShards } from "@/components/background/crystalCSG";
+import { buildFracturedShards, type FracturedShard } from "@/components/background/crystalCSG";
 import {
   FRACTURE_ENVELOPE,
-  FRACTURE_SHARD_COUNT,
+  FRACTURE_LAMINA_PER_FAMILY,
   SCULPTURE_WORLD_POSITION,
   type QualityTier,
 } from "@/constants/scene";
 import { useControlledStillness } from "@/hooks/useControlledStillness";
 
 /**
- * FracturedCrystal — Approccio A (approvato): massa unica composta da
- * numerose lamine reali, ottenute intersecando (CSG) lastre orientate
- * deterministicamente con l'inviluppo del cristallo. Nessuna BoxGeometry
- * "nuda" in scena: ogni mesh renderizzata è il risultato di un'operazione
- * booleana, quindi geometricamente irregolare e sfaccettata.
+ * FracturedCrystal — Approccio A, v2: struttura a famiglie deterministiche
+ * (massa centrale sugli assi dell'inviluppo + famiglie di lamine diagonali
+ * ripetute con jitter stretto), non più una distribuzione uniforme sulla
+ * sfera. Nessuna BoxGeometry "nuda" in scena: ogni mesh renderizzata è
+ * l'esito di un'intersezione booleana (CSG) con l'inviluppo.
  *
- * Calcolo eseguito una sola volta per tier (useMemo, dipendenze fisse):
- * mai ricostruito per frame, mai a runtime.
+ * NON VERIFICATO visivamente da me (nessuna capacità di rendering in
+ * questo ambiente) — solo verificato a livello di codice/logica.
  */
-function Shard({ geometry, useTransmission, dim }: { geometry: THREE.BufferGeometry; useTransmission: boolean; dim: boolean }) {
-  const matRef = useRef<any>(null);
-
-  useFrame(() => {
-    if (!matRef.current) return;
-    const targetOpacity = dim ? 0.55 : 0.82;
-    matRef.current.opacity = THREE.MathUtils.lerp(matRef.current.opacity ?? 0.7, targetOpacity, 0.04);
-  });
-
+function Shard({ shard, useTransmission }: { shard: FracturedShard; useTransmission: boolean }) {
+  const isCore = shard.kind === "core";
   return (
-    <mesh geometry={geometry}>
+    <mesh geometry={shard.geometry}>
       {useTransmission ? (
         <MeshTransmissionMaterial
-          ref={matRef}
-          transmission={0.88}
-          thickness={0.2}
-          roughness={0.05}
+          transmission={isCore ? 0.72 : 0.9}
+          thickness={isCore ? 0.4 : 0.15}
+          roughness={isCore ? 0.08 : 0.04}
           ior={1.42}
-          chromaticAberration={0.014}
-          color="#DCE8FF"
+          chromaticAberration={0.012}
+          color={isCore ? "#B9CDFF" : "#DCE8FF"}
           attenuationColor="#5C93FF"
-          attenuationDistance={0.75}
+          attenuationDistance={isCore ? 0.5 : 0.9}
           transparent
-          opacity={0.78}
+          opacity={isCore ? 0.88 : 0.7}
         />
       ) : (
-        <meshPhysicalMaterial ref={matRef} color="#B9CDFF" roughness={0.15} metalness={0.05} transparent opacity={0.5} />
+        <meshPhysicalMaterial
+          color={isCore ? "#8FA8E0" : "#B9CDFF"}
+          roughness={0.15}
+          metalness={0.05}
+          transparent
+          opacity={isCore ? 0.7 : 0.4}
+        />
       )}
     </mesh>
   );
@@ -70,7 +68,7 @@ function CoreLight() {
 
   return (
     <mesh>
-      <sphereGeometry args={[0.055, 20, 20]} />
+      <sphereGeometry args={[0.05, 20, 20]} />
       <meshStandardMaterial ref={matRef} color="#F2C94C" emissive="#F2C94C" emissiveIntensity={1.8} toneMapped={false} />
     </mesh>
   );
@@ -79,29 +77,22 @@ function CoreLight() {
 export function FracturedCrystal({ tier }: { tier: QualityTier }) {
   const useTransmission = tier !== "mobile";
   const reflectiveGround = tier !== "mobile";
-  const shardCount = FRACTURE_SHARD_COUNT[tier];
+  const laminaPerFamily = FRACTURE_LAMINA_PER_FAMILY[tier];
 
   // Costruzione una sola volta: seed fisso + tier fisso per la durata del
   // mount => stesso identico risultato ogni volta, mai ricalcolato.
-  const geometries = useMemo(() => {
+  const shards = useMemo(() => {
     const envelopeRadius = Math.max(FRACTURE_ENVELOPE.width, FRACTURE_ENVELOPE.height, FRACTURE_ENVELOPE.depth) / 2;
-    const specs = generateShardSpecs(shardCount, envelopeRadius);
+    const specs = generateShardSpecs(laminaPerFamily, envelopeRadius);
     return buildFracturedShards(specs, FRACTURE_ENVELOPE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shardCount]);
-
-  const { activeEvent } = useControlledStillness(geometries.length);
+  }, [laminaPerFamily]);
 
   return (
     <group position={SCULPTURE_WORLD_POSITION}>
       <group position={[0, FRACTURE_ENVELOPE.height / 2, 0]}>
-        {geometries.map((geo, i) => (
-          <Shard
-            key={i}
-            geometry={geo}
-            useTransmission={useTransmission}
-            dim={activeEvent?.type === "conduit-pulse" && activeEvent.targetIndex % geometries.length === i}
-          />
+        {shards.map((shard, i) => (
+          <Shard key={i} shard={shard} useTransmission={useTransmission} />
         ))}
         <CoreLight />
       </group>

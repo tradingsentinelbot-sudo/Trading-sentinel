@@ -13,10 +13,15 @@ import type { ShardSpec } from "@/components/background/crystalFracture";
  * chiamante la invoca dentro un useMemo con dipendenze vuote) — mai per
  * frame, mai in useFrame.
  */
+export type FracturedShard = {
+  geometry: THREE.BufferGeometry;
+  kind: ShardSpec["kind"];
+};
+
 export function buildFracturedShards(
   shards: ShardSpec[],
   envelope: { width: number; height: number; depth: number }
-): THREE.BufferGeometry[] {
+): FracturedShard[] {
   const envelopeBrush = new Brush(new THREE.BoxGeometry(envelope.width, envelope.height, envelope.depth));
   envelopeBrush.updateMatrixWorld();
 
@@ -25,7 +30,7 @@ export function buildFracturedShards(
 
   const slabSpan = Math.max(envelope.width, envelope.height, envelope.depth) * 3;
   const upAxis = new THREE.Vector3(0, 0, 1);
-  const geometries: THREE.BufferGeometry[] = [];
+  const results: FracturedShard[] = [];
 
   for (const shard of shards) {
     const slabGeometry = new THREE.BoxGeometry(slabSpan, slabSpan, shard.thickness);
@@ -39,11 +44,11 @@ export function buildFracturedShards(
     const result = evaluator.evaluate(slabBrush, envelopeBrush, INTERSECTION);
     if (result.geometry.attributes.position && result.geometry.attributes.position.count > 0) {
       result.geometry.computeVertexNormals();
-      geometries.push(result.geometry);
+      results.push({ geometry: result.geometry, kind: shard.kind });
     }
 
     slabGeometry.dispose();
   }
 
-  return geometries;
+  return results;
 }

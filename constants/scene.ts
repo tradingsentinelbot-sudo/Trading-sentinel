@@ -87,31 +87,50 @@ export type QualityTier = "desktop" | "tablet" | "mobile";
 
 /**
  * Frattura procedurale del cristallo (Approccio A, approvato).
- * Seed fisso, nessun Math.random() a runtime: la lista di lamine viene
- * generata una sola volta da una distribuzione deterministica (spirale
- * aurea per le normali + jitter seedato entro limiti stretti) e poi
- * tagliata via CSG dentro l'inviluppo — mai ricalcolata per frame.
+ * Seed fisso, nessun Math.random() a runtime. Struttura a famiglie
+ * (non distribuzione uniforme): massa centrale + famiglie di lamine
+ * diagonali ripetute — vedi generateShardSpecs in crystalFracture.ts.
  */
 export const FRACTURE_SEED = 133742;
 
 export const FRACTURE_ENVELOPE = {
-  width: 1.05,
-  height: 1.25,
-  depth: 0.95,
+  width: 1.0,
+  height: 1.3,
+  depth: 0.92,
 };
 
-/** Numero di lamine per tier — meno lamine = meno operazioni CSG (costose in build, mai a runtime). */
-export const FRACTURE_SHARD_COUNT: Record<QualityTier, number> = {
-  desktop: 26,
-  tablet: 18,
-  mobile: 12,
+/**
+ * Struttura a famiglie, non distribuzione uniforme sulla sfera.
+ *
+ * - CORE: 6 lamine spesse allineate ai 3 assi dell'inviluppo (±X ±Y ±Z) —
+ *   la "massa centrale coerente" richiesta. Fisse, sempre presenti,
+ *   costo CSG trascurabile (6 operazioni).
+ * - LAMINA: famiglie di direzioni diagonali; ogni famiglia genera più
+ *   lamine sottili quasi parallele tra loro (piccolo jitter deterministico
+ *   attorno alla stessa direzione) — è la ripetizione a produrre il ritmo
+ *   visivo della reference, non tante direzioni diverse senza relazione.
+ */
+export const FRACTURE_CORE_THICKNESS: [number, number] = [0.16, 0.24];
+
+export const FRACTURE_LAMINA_FAMILY_AXES: [number, number, number][] = [
+  [1, 1, 0],
+  [1, -1, 0],
+  [0, 1, 1],
+  [0, 1, -1],
+  [1, 0, 1],
+  [1, 0, -1],
+];
+
+export const FRACTURE_LAMINA_PER_FAMILY: Record<QualityTier, number> = {
+  desktop: 3,
+  tablet: 2,
+  mobile: 1,
 };
 
-export const FRACTURE_THICKNESS_RANGE: [number, number] = [0.05, 0.15];
-/** Distanza delle lamine dal centro, come frazione del raggio dell'inviluppo. */
-export const FRACTURE_OFFSET_RANGE: [number, number] = [0.08, 0.85];
-/** Jitter angolare massimo applicato alla normale deterministica (radianti). */
-export const FRACTURE_ANGLE_JITTER = 0.35;
+export const FRACTURE_LAMINA_THICKNESS_RANGE: [number, number] = [0.018, 0.05];
+export const FRACTURE_LAMINA_OFFSET_RANGE: [number, number] = [0.12, 0.82];
+/** Jitter angolare stretto attorno all'asse della famiglia — mantiene le lamine "quasi parallele". */
+export const FRACTURE_FAMILY_JITTER = 0.11;
 
 /**
  * Toggle temporaneo per confrontare direttamente le due varianti della
