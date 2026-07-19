@@ -84,6 +84,11 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] **Design estetico congelato** — Sistema 3D (Digital Sculpture/SceneCanvas) sospeso su richiesta esplicita, codice preservato in `components/background/` per revisione futura. Hero ora usa l'immagine fornita (`public/hero-artifact.png`) come elemento visivo statico.
+- [x] Footer — documentazione legale, disclaimer di rischio, copyright.
+- [x] Pagine legali — `/risk-disclosure`, `/terms-of-service`, `/privacy-policy`, testo ufficiale riportato fedelmente (placeholder `[DATA]`/`[INSERIRE EMAIL UFFICIALE]` non compilati, in attesa di dati reali).
+- [ ] Bug aperto — vedi `BUGS.md` (file `index.ts` su Android, indagine sospesa).
+
 - [x] Fix (hardening, causa non confermata) — Aggiunto `public/.assetsignore` (esclude `.ts`/`.tsx`/`.map`/`.d.ts` dagli asset Cloudflare caricati da Wrangler), script `scripts/ensure-assetsignore.js` eseguito dopo ogni `cf:build` (copia l'ignore file + scansiona `.open-next/assets` per file sospetti e li segnala in console), `productionBrowserSourceMaps: false` esplicito in `next.config.js`. **Non verificato**: non è stato possibile eseguire una build reale in questo ambiente (nessun accesso di rete). Da confermare al prossimo deploy controllando l'output dello script.
 - [x] Geometria — Approccio A v2: struttura a famiglie deterministiche (massa centrale sugli assi dell'inviluppo + famiglie di lamine diagonali ripetute) al posto della distribuzione uniforme sulla sfera. **Non verificato visivamente**, solo verificato a livello di codice.
 

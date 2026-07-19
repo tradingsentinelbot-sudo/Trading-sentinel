@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           secondo l'ordine definito in Fase 07.5.
         */}
       </main>
+      <Footer />
     </>
   );
 }

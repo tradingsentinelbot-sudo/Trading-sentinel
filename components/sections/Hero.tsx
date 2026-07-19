@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -7,14 +8,16 @@ import { staggerContainer, fadeUp } from "@/components/motion/variants";
 
 /**
  * Hero — prima impressione e conversione (04.3 / 05.2).
- * L'entità visiva non è più un componente DOM: è la Digital Sculpture 3D
- * renderizzata nel SceneCanvas persistente (montato in app/layout.tsx),
- * visibile dietro a questa sezione. Qui resta solo il contenuto testuale.
- * Desktop: testo nella metà sinistra, la colonna destra resta vuota per
- * lasciare lo spazio compositivo alla scultura, coerente col waypoint
- * camera "hero" (constants/scene.ts).
- * Mobile: badge → titolo → testo → CTA.
- * Entrata progressiva: badge, titolo, testo, pulsanti.
+ *
+ * Sistema 3D (Digital Sculpture / SceneCanvas) congelato su richiesta
+ * esplicita, in attesa di revisione estetica con strumenti di verifica
+ * visiva adeguati — codice preservato in components/background/, non
+ * rimosso. L'elemento visivo della Hero è, provvisoriamente, l'immagine
+ * statica fornita.
+ *
+ * Desktop: testo nella metà sinistra, immagine nella colonna destra.
+ * Mobile: badge → titolo → testo → CTA → immagine.
+ * Entrata progressiva: badge, titolo, testo, pulsanti, poi l'immagine.
  */
 export function Hero() {
   return (
@@ -58,9 +61,21 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Colonna destra intenzionalmente vuota su desktop: la Digital
-            Sculpture vive nel Canvas 3D dietro la pagina, non qui. */}
-        <div aria-hidden className="hidden md:block" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mx-auto w-full max-w-[440px] overflow-hidden rounded-card md:max-w-none"
+        >
+          <Image
+            src="/hero-artifact.png"
+            alt="Trading Sentinel — entità digitale, artefatto centrale della Hero"
+            width={1024}
+            height={1536}
+            priority
+            className="h-auto w-full object-contain"
+          />
+        </motion.div>
       </div>
     </section>
   );

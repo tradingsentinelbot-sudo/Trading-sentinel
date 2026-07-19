@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
+
+// Sistema 3D (SceneCanvas + Digital Sculpture) congelato su richiesta
+// esplicita: design in attesa di revisione con strumenti di verifica
+// visiva adeguati. Codice preservato in components/background/, non
+// rimosso. Per riattivarlo: reintrodurre l'import e <SceneCanvasClientOnly />.
+// import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,10 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it" className={inter.variable}>
-      <body>
-        <SceneCanvasClientOnly />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
