@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ export function Navbar() {
   const scrolled = useScrolled();
   const isDesktop = useIsDesktop();
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   // Chiude il menu mobile se la viewport torna desktop (stesso comportamento di prima)
   useEffect(() => {
@@ -53,10 +55,18 @@ export function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href="/accedi"
+              className="text-[14px] font-medium text-ink-muted transition-colors duration-200 hover:text-ink"
+            >
+              Accedi
+            </a>
+          </li>
         </ul>
 
         <div className="hidden md:block">
-          <Button variant="primary" size="md">
+          <Button variant="primary" size="md" onClick={() => router.push("/accedi")}>
             Inizia Free Trial
           </Button>
         </div>
@@ -93,8 +103,17 @@ export function Navbar() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/accedi"
+                  onClick={() => setMenuOpen(false)}
+                  className="block rounded-control px-2 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
+                >
+                  Accedi
+                </a>
+              </li>
               <li className="mt-2">
-                <Button variant="primary" size="md" className="w-full">
+                <Button variant="primary" size="md" className="w-full" onClick={() => router.push("/accedi")}>
                   Inizia Free Trial
                 </Button>
               </li>

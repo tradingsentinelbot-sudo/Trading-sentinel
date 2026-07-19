@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -20,6 +21,7 @@ import { staggerContainer, fadeUp } from "@/components/motion/variants";
  * Entrata progressiva: badge, titolo, testo, pulsanti, poi l'immagine.
  */
 export function Hero() {
+  const router = useRouter();
   return (
     <section className="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44">
       <div className="container-sentinel grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-8">
@@ -52,10 +54,14 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" onClick={() => router.push("/accedi")}>
               Inizia la Free Trial di 72 ore
             </Button>
-            <Button variant="secondary" size="lg">
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={() => document.getElementById("come-funziona")?.scrollIntoView({ behavior: "smooth" })}
+            >
               Scopri come funziona
             </Button>
           </motion.div>

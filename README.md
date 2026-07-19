@@ -66,6 +66,29 @@ problema alla radice.
 File di configurazione coinvolti: `wrangler.jsonc`, `open-next.config.ts`.
 Nessun passaggio manuale successivo al deploy da Git è richiesto.
 
+### Variabili d'ambiente / secret richiesti
+
+Vedi `.dev.vars.example` per l'elenco completo e la spiegazione di ciascuna
+(login Telegram, sessione, Stripe, backend). In sviluppo locale: copia in
+`.dev.vars` (mai commitato). In produzione:
+
+- Variabili **non** prefissate `NEXT_PUBLIC_` → secret Cloudflare Workers
+  (`wrangler secret put NOME`, o dashboard → Settings → Variables, come
+  "Secret" non come "Text").
+- Variabili `NEXT_PUBLIC_*` → devono essere disponibili **al momento della
+  build** (`npm run cf:build`), quindi vanno impostate come variabili
+  d'ambiente del sistema di build (Workers Builds/CI), non solo come
+  secret runtime.
+
+### Integrazione backend — da completare
+
+`lib/backendClient.ts` contiene l'interfaccia verso il backend/bot
+Telegram esistente (stato licenza, avvio trial, attivazione abbonamento).
+Gli endpoint sono segnaposto espliciti (`TODO-endpoint-...`): mancano
+URL base reale, path degli endpoint, e formato di autenticazione
+server-to-server. Finché non vengono forniti, le funzioni lanciano un
+errore esplicito invece di restituire dati finti.
+
 ## Architettura
 
 ```
@@ -87,6 +110,10 @@ lib/                    # Utility (cn, rng seedato, ...)
 - [x] **Design estetico congelato** — Sistema 3D (Digital Sculpture/SceneCanvas) sospeso su richiesta esplicita, codice preservato in `components/background/` per revisione futura. Hero ora usa l'immagine fornita (`public/hero-artifact.png`) come elemento visivo statico.
 - [x] Footer — documentazione legale, disclaimer di rischio, copyright.
 - [x] Pagine legali — `/risk-disclosure`, `/terms-of-service`, `/privacy-policy`, testo ufficiale riportato fedelmente (placeholder `[DATA]`/`[INSERIRE EMAIL UFFICIALE]` non compilati, in attesa di dati reali).
+- [x] Auth — Login con Telegram Widget (verifica server-side dell'hash, sessione firmata via cookie httpOnly). `/accedi`, `/account`.
+- [x] Pagamenti — Stripe Checkout (piani Basic/Pro), webhook con verifica firma via SubtleCrypto (compatibile Cloudflare Workers). Route: `/api/checkout`, `/api/webhook/stripe`.
+- [x] Trial — `/api/trial/start`, pulsante dedicato in `/account`.
+- [ ] **Integrazione backend esistente — bloccata in attesa del contratto API reale** (vedi `lib/backendClient.ts` e sezione "Integrazione backend" sopra).
 - [ ] Bug aperto — vedi `BUGS.md` (file `index.ts` su Android, indagine sospesa).
 
 - [x] Fix (hardening, causa non confermata) — Aggiunto `public/.assetsignore` (esclude `.ts`/`.tsx`/`.map`/`.d.ts` dagli asset Cloudflare caricati da Wrangler), script `scripts/ensure-assetsignore.js` eseguito dopo ogni `cf:build` (copia l'ignore file + scansiona `.open-next/assets` per file sospetti e li segnala in console), `productionBrowserSourceMaps: false` esplicito in `next.config.js`. **Non verificato**: non è stato possibile eseguire una build reale in questo ambiente (nessun accesso di rete). Da confermare al prossimo deploy controllando l'output dello script.
