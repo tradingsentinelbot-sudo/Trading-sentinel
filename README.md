@@ -107,6 +107,11 @@ lib/                    # Utility (cn, rng seedato, ...)
 
 ## Stato sviluppo
 
+- [x] **Landing strutturalmente completa** — Hero (provvisoria) → Problema (testo ufficiale) → Cos'è → Come funziona → Metodologia (Quiet Technology) → Versioni (Basic/Pro) → Trust/Risk summary → FAQ → CTA finale → Footer. Tutti gli anchor della Navbar (`#cosa-e`, `#come-funziona`, `#versioni`, `#faq`) ora risolvono a una sezione reale.
+- [x] Design system — gradiente reale sul pulsante primario, metallic silver introdotto (bordo pulsante secondario, divisori, icone trust), soft white confermato come testo principale (mai bianco puro), hover/focus/transizioni su tutti gli elementi interattivi.
+- [x] CTA commerciali centralizzate — `constants/config.ts` (`TELEGRAM_BOT_MANAGER_URL`, `null` finché non fornito) + `lib/commercialCta.ts` (`resolveCommercialCTA`). Tutte le CTA di conversione (Hero, Navbar, Pricing, CTA finale) passano da qui: nessun link inventato, fallback funzionante sul flusso interno esistente finché il Bot Manager non è collegato.
+- [x] Hardening bug (giro 2) — `public/_headers` (Content-Disposition: inline, X-Content-Type-Options: nosniff) su tutti gli asset statici. Nuova evidenza registrata in `BUGS.md` (anche il PNG è comparso in galleria — la diagnosi ora punta a un meccanismo indipendente dal tipo di file).
+
 - [x] **Design estetico congelato** — Sistema 3D (Digital Sculpture/SceneCanvas) sospeso su richiesta esplicita, codice preservato in `components/background/` per revisione futura. Hero ora usa l'immagine fornita (`public/hero-artifact.png`) come elemento visivo statico.
 - [x] Footer — documentazione legale, disclaimer di rischio, copyright.
 - [x] Pagine legali — `/risk-disclosure`, `/terms-of-service`, `/privacy-policy`, testo ufficiale riportato fedelmente (placeholder `[DATA]`/`[INSERIRE EMAIL UFFICIALE]` non compilati, in attesa di dati reali).

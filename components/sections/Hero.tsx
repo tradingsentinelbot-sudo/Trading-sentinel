@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { staggerContainer, fadeUp } from "@/components/motion/variants";
+import { resolveCommercialCTA } from "@/lib/commercialCta";
 
 /**
  * Hero — prima impressione e conversione (04.3 / 05.2).
@@ -54,7 +55,7 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
-            <Button variant="primary" size="lg" onClick={() => router.push("/accedi")}>
+            <Button variant="primary" size="lg" onClick={() => router.push(resolveCommercialCTA().href)}>
               Inizia la Free Trial di 72 ore
             </Button>
             <Button

@@ -1,38 +1,42 @@
 # Known Issues
 
-## APERTO — File `index.ts` generati nella galleria Android
+## APERTO — File generati nella galleria Android (`index.ts`, e ora anche il PNG della Hero)
 
-**Stato**: aperto, non risolto, indagine sospesa su richiesta esplicita.
+**Stato**: aperto, non risolto. Indagine proseguita con hardening aggiuntivo, non dichiarato "irriproducibile" — il fenomeno è considerato reale.
 
-**Osservazione riportata**: aprendo il sito su dispositivo Android reale,
-compaiono ripetutamente file denominati `index.ts` (23 occorrenze
-nell'ultima osservazione; in precedenza, con una build diversa, erano
-comparsi file video vuoti da 0 secondi) nella galleria/storage del
-dispositivo.
+**Nuova evidenza (cambia la diagnosi)**: oltre ai file `index.ts` (~23
+occorrenze), è comparso in galleria anche il file PNG della Hero
+(`hero-artifact.png`) — un asset legittimo e necessario al sito, non un
+sorgente esposto per errore. Questo è un dato importante: se un file
+`.ts` (mai inteso per essere servito) e un file `.png` (intenzionalmente
+servito, correttamente) generano lo stesso comportamento, la causa più
+probabile non è "quale file viene servito" ma "come viene gestita/
+memorizzata dal dispositivo qualunque risorsa che il sito serve o che il
+browser mette in cache" — un meccanismo a monte del tipo di file, non
+specifico al nostro codice sorgente.
 
-**Verificato nel codice** (grep esaustivo su tutto il repository):
-- Nessun riferimento a `MediaRecorder`, `captureStream`, `Blob`, `video/`,
-  attributi `download`, `toDataURL`.
-- Nessun service worker, manifest PWA, o script di generazione file.
-- `public/` non conteneva asset sorgente prima dell'intervento di
-  hardening (vedi sotto).
+**Verificato** (grep esaustivo, invariato dal giro precedente): nessun
+riferimento a `MediaRecorder`, `captureStream`, `Blob`, `download`,
+`toDataURL` nel codice applicativo; nessun service worker/manifest;
+`public/` conteneva solo asset legittimi (immagine Hero, `.assetsignore`).
 
-**Mitigazione applicata** (senza conferma della causa esatta):
-- `public/.assetsignore` — esclude `*.ts`, `*.tsx`, `*.map`, `*.d.ts`
-  dagli asset caricati su Cloudflare Workers.
-- `scripts/ensure-assetsignore.js` — eseguito dopo ogni `cf:build`,
-  copia l'ignore file nell'output e scansiona `.open-next/assets`
-  segnalando in console eventuali file sospetti realmente presenti.
-- `productionBrowserSourceMaps: false` esplicito in `next.config.js`.
+**Modificato in questo giro** (hardening aggiuntivo, indipendente dalla
+causa esatta):
+- `public/_headers` — impone `Content-Disposition: inline` e
+  `X-Content-Type-Options: nosniff` su tutti gli asset statici serviti da
+  Cloudflare Workers. Confermato dalla documentazione ufficiale Cloudflare
+  che `_headers` si applica alle risposte servite direttamente dagli
+  asset statici (il nostro caso, essendo `hero-artifact.png` un file
+  reale in `public/`) e non alle risposte generate dal Worker/SSR — quindi
+  è applicabile qui.
+- Restano attivi `public/.assetsignore`, `scripts/ensure-assetsignore.js`,
+  `productionBrowserSourceMaps: false` (giro precedente).
 
-**Non verificato**: non è stato possibile eseguire una build reale in
-questo ambiente di sviluppo (nessun accesso di rete) per confermare se le
-mitigazioni sopra risolvono il fenomeno.
+**Non verificabile da questo ambiente**: non è possibile eseguire una
+build/deploy reale né osservare il comportamento di un browser Android
+reale da qui. Non posso confermare se l'hardening risolve il fenomeno.
 
-**Prossimi passi (quando si riprenderà l'indagine)**: controllare l'output
-di `scripts/ensure-assetsignore.js` al prossimo deploy; se non segnala
-file sospetti, la causa non è nella cartella asset servita da Wrangler e
-andrà cercata lato dispositivo/browser (nome esatto dei file, percorso di
-salvataggio, riproducibilità su altri siti WebGL).
+**Decisione**: sviluppo funzionale prosegue, come da istruzione esplicita.
+Bug isolato, non bloccante, hardening applicato ai punti verificabili dal
+codice.
 
-**Decisione**: sviluppo funzionale prosegue. Bug isolato, non bloccante.

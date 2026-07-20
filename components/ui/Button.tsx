@@ -12,8 +12,8 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 /**
  * Button — CTA primaria e secondaria.
  *
- * Primaria: sfondo Sentinel Blue, glow leggero, hover con sollevamento.
- * Secondaria: trasparente, bordo sottile.
+ * Primaria: gradiente Sentinel Blue, glow, hover con sollevamento.
+ * Secondaria: bordo metallic silver sottile, trasparente.
  * Rif. Fase 02.5 / 04.13 (Hover Lift).
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,17 +24,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "group relative inline-flex items-center justify-center gap-2 rounded-control font-medium",
           "transition-all duration-300 ease-sentinel",
-          "focus-visible:outline-none",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sentinel-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian",
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
           variant === "primary" && [
-            "bg-sentinel-500 text-white shadow-glow-sm",
-            "hover:bg-sentinel-400 hover:shadow-glow hover:-translate-y-0.5",
+            "bg-gradient-to-b from-sentinel-400 to-sentinel-600 text-white shadow-glow-sm",
+            "hover:from-sentinel-400 hover:to-sentinel-500 hover:shadow-glow hover:-translate-y-0.5",
             "active:translate-y-0 active:shadow-glow-sm",
           ],
           variant === "secondary" && [
-            "border border-white/15 bg-transparent text-ink",
-            "hover:border-white/30 hover:bg-white/[0.04] hover:-translate-y-0.5",
+            "border border-silver/25 bg-transparent text-ink",
+            "hover:border-silver/50 hover:bg-white/[0.04] hover:-translate-y-0.5",
           ],
           className
         )}

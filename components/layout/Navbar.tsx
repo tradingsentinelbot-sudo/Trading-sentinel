@@ -10,6 +10,7 @@ import { LogoMark } from "@/components/ui/LogoMark";
 import { NAV_LINKS } from "@/constants/navigation";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import { resolveCommercialCTA } from "@/lib/commercialCta";
 
 /**
  * Navbar — orientamento senza distrazione (05.1).
@@ -66,7 +67,7 @@ export function Navbar() {
         </ul>
 
         <div className="hidden md:block">
-          <Button variant="primary" size="md" onClick={() => router.push("/accedi")}>
+          <Button variant="primary" size="md" onClick={() => router.push(resolveCommercialCTA().href)}>
             Inizia Free Trial
           </Button>
         </div>
@@ -113,7 +114,7 @@ export function Navbar() {
                 </a>
               </li>
               <li className="mt-2">
-                <Button variant="primary" size="md" className="w-full" onClick={() => router.push("/accedi")}>
+                <Button variant="primary" size="md" className="w-full" onClick={() => router.push(resolveCommercialCTA().href)}>
                   Inizia Free Trial
                 </Button>
               </li>
