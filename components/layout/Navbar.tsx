@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,10 +22,20 @@ export function Navbar() {
   const isDesktop = useIsDesktop();
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSectionNavigation = (href: string) => {
     setMenuOpen(false);
     const id = href.replace("#", "");
+
+    // Le voci della navigazione sono sezioni della homepage. Da una pagina
+    // secondaria devono quindi riportare alla home, invece di tentare di
+    // cercare un id inesistente nella pagina corrente.
+    if (pathname !== "/") {
+      router.push(`/${href}`);
+      return;
+    }
+
     window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
       window.history.replaceState(null, "", href);
