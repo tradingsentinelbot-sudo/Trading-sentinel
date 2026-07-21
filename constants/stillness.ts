@@ -24,6 +24,6 @@ export const STILLNESS = {
  * continuità allo spazio, come richiesto dalla Global Creative Direction.
  */
 export const AMBIENT_LIGHT_ORIGIN = {
-  color: "#3D7DFA",
-  colorSoft: "#5C93FF",
+  color: "#D6A84A",
+  colorSoft: "#E5C477",
 };

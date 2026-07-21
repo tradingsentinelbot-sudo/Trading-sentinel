@@ -3,7 +3,6 @@
 import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, PerformanceMonitor } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { CameraRig } from "@/components/background/CameraRig";
 import { DigitalSculpture3D } from "@/components/background/DigitalSculpture3D";
 import { TIER_SETTINGS, type QualityTier } from "@/constants/scene";
@@ -33,7 +32,7 @@ export function SceneCanvas() {
     <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.92]" aria-hidden>
       <Canvas
         frameloop={reducedMotion ? "demand" : "always"}
-        dpr={settings.dpr}
+        dpr={settings.dpr[1] > 1.5 ? [1, 1.5] : settings.dpr}
         gl={{ antialias: true, powerPreference: "high-performance" }}
         camera={{ fov: 34, position: [0.72, 0.25, 5.4] }}
         onCreated={({ camera }) => {
@@ -59,12 +58,6 @@ export function SceneCanvas() {
         </Suspense>
 
         <CameraRig pointerParallax={settings.pointerParallax && !reducedMotion} />
-
-        {settings.postProcessing && !reducedMotion && (
-          <EffectComposer>
-            <Bloom luminanceThreshold={0.9} intensity={0.4} mipmapBlur radius={0.5} />
-          </EffectComposer>
-        )}
       </Canvas>
     </div>
   );

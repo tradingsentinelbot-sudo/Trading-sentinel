@@ -149,7 +149,7 @@ export const TIER_SETTINGS: Record<
     pointerParallax: boolean;
   }
 > = {
-  desktop: { dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true },
+  desktop: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: true },
   tablet: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false },
   mobile: { dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false },
 };

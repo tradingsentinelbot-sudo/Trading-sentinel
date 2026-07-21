@@ -20,7 +20,7 @@ export function LogoMark({ className }: { className?: string }) {
       />
       <path
         d="M7 8.5 16 12l9-3.5M16 12v15"
-        stroke="url(#sentinel-blue)"
+        stroke="url(#sentinel-amber)"
         strokeWidth="1.1"
         strokeLinejoin="miter"
       />
@@ -38,14 +38,14 @@ export function LogoMark({ className }: { className?: string }) {
           <stop offset="0.5" stopColor="#8E9AAA" stopOpacity="0.72" />
           <stop offset="1" stopColor="#46515E" stopOpacity="0.48" />
         </linearGradient>
-        <linearGradient id="sentinel-blue" x1="8" y1="8" x2="24" y2="25" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#9AB8FF" />
-          <stop offset="1" stopColor="#3D7DFA" stopOpacity="0.48" />
+        <linearGradient id="sentinel-amber" x1="8" y1="8" x2="24" y2="25" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#E5C477" />
+          <stop offset="1" stopColor="#A66F1B" stopOpacity="0.52" />
         </linearGradient>
         <linearGradient id="sentinel-core" x1="10" y1="11" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#D7E2FF" />
-          <stop offset="0.45" stopColor="#6D98FF" />
-          <stop offset="1" stopColor="#3D7DFA" stopOpacity="0.58" />
+          <stop stopColor="#F1D28A" />
+          <stop offset="0.45" stopColor="#D6A84A" />
+          <stop offset="1" stopColor="#8C6825" stopOpacity="0.58" />
         </linearGradient>
       </defs>
     </svg>
