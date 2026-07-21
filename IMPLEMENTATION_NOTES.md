@@ -17,3 +17,9 @@ L'errore di prerendering era causato da componenti Server che importavano e rend
 ## Integrazione futura
 
 Le CTA commerciali passano da `lib/commercialCta.ts`. Quando sarà disponibile il link reale del Telegram Bot Manager, valorizzare `NEXT_PUBLIC_TELEGRAM_BOT_MANAGER_URL`.
+
+
+## Premium direction update
+- Mobile navigation actions are explicit buttons to guarantee section navigation and menu closure.
+- Active sculpture is now Keystone Compresso, replacing the previous cube variant.
+- Primary CTA no longer uses the previous blue metallic gradient; palette is neutral soft-white / metallic silver with restrained gold accents.

@@ -47,8 +47,8 @@ export function SceneCanvas() {
         <ambientLight intensity={0.18} />
         <hemisphereLight args={["#7B8EA8", "#07090D", 0.48]} />
         <directionalLight position={[2, 3, 2]} intensity={0.92} color="#E7EBF0" />
-        <directionalLight position={[-2, -1, -1.5]} intensity={0.22} color="#3D7DFA" />
-        <pointLight position={[0.8, 0.25, 1.4]} intensity={0.55} distance={5.5} color="#D6A84A" />
+        <directionalLight position={[-2, -1, -1.5]} intensity={0.12} color="#9EA6B2" />
+        <pointLight position={[0.8, 0.25, 1.4]} intensity={0.42} distance={5.5} color="#D6A84A" />
 
         {settings.transmissionMaterial && (
           <Environment preset="city" environmentIntensity={0.35} />

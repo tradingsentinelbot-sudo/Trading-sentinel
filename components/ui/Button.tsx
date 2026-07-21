@@ -28,9 +28,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
           variant === "primary" && [
-            "bg-[linear-gradient(135deg,#E4E8EE_0%,#B9C1CC_28%,#5C93FF_68%,#2C63E0_100%)] text-[#07101E] shadow-glow-sm",
-            "hover:brightness-110 hover:shadow-glow hover:-translate-y-0.5",
-            "active:translate-y-0 active:shadow-glow-sm",
+            "bg-[#D7DBE0] text-[#0B0D10] shadow-[0_10px_34px_-18px_rgba(215,219,224,0.7)]",
+            "hover:bg-[#EEF0F2] hover:shadow-[0_14px_42px_-18px_rgba(215,219,224,0.85)] hover:-translate-y-0.5",
+            "active:translate-y-0",
           ],
           variant === "secondary" && [
             "border border-silver/30 bg-white/[0.025] text-ink backdrop-blur-sm",

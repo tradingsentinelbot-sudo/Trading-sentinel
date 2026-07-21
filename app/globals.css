@@ -10,19 +10,19 @@
   body {
     @apply bg-obsidian text-ink font-body antialiased;
     background-image:
-      radial-gradient(80% 55% at 72% -10%, rgba(61,125,250,0.08), transparent 62%),
-      radial-gradient(55% 45% at 18% 38%, rgba(214,168,74,0.045), transparent 68%),
+      radial-gradient(70% 52% at 72% -10%, rgba(199,204,212,0.055), transparent 62%),
+      radial-gradient(55% 45% at 18% 38%, rgba(214,168,74,0.04), transparent 68%),
       linear-gradient(180deg, #08090B 0%, #0A0B0D 48%, #08090B 100%);
   }
 
   ::selection {
-    background: rgba(61, 125, 250, 0.35);
+    background: rgba(199, 204, 212, 0.28);
     color: #ffffff;
   }
 
   /* Focus visibile per accessibilità (07.13) */
   :focus-visible {
-    outline: 2px solid #3d7dfa;
+    outline: 2px solid #C7CCD4;
     outline-offset: 3px;
     border-radius: 4px;
   }

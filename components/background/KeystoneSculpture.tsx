@@ -121,8 +121,8 @@ function ControlledVoid({ useTransmission }: { useTransmission: boolean }) {
               roughness={0.045}
               ior={1.45}
               chromaticAberration={0.012}
-              color="#EAF1FF"
-              attenuationColor="#EAF1FF"
+              color="#DDE1E6"
+              attenuationColor="#C7CCD4"
               attenuationDistance={1.1}
               transparent
               opacity={0.9}

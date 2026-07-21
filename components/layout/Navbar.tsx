@@ -104,29 +104,26 @@ export function Navbar() {
             <ul className="container-sentinel flex flex-col gap-1 py-5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleSectionNavigation(link.href);
-                    }}
-                    className="block rounded-control px-2 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
+                  <button
+                    type="button"
+                    onClick={() => handleSectionNavigation(link.href)}
+                    className="block w-full rounded-control px-2 py-3 text-left text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
               <li>
-                <a
-                  href="/accedi"
+                <button
+                  type="button"
                   onClick={() => {
                     setMenuOpen(false);
                     router.push("/accedi");
                   }}
-                  className="block rounded-control px-2 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
+                  className="block w-full rounded-control px-2 py-3 text-left text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
                 >
                   Accedi
-                </a>
+                </button>
               </li>
               <li className="mt-2">
                 <Button variant="primary" size="md" className="w-full" onClick={() => router.push(resolveCommercialCTA().href)}>
