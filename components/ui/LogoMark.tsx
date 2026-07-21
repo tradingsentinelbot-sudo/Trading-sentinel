@@ -44,7 +44,7 @@ export function LogoMark({ className }: { className?: string }) {
         </linearGradient>
         <linearGradient id="sentinel-core" x1="10" y1="11" x2="22" y2="22" gradientUnits="userSpaceOnUse">
           <stop stopColor="#F1D28A" />
-          <stop offset="0.45" stopColor="#D6A84A" />
+          <stop offset="0.45" stopColor="#6F89A8" />
           <stop offset="1" stopColor="#8C6825" stopOpacity="0.58" />
         </linearGradient>
       </defs>
