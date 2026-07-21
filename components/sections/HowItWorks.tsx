@@ -8,7 +8,7 @@ const STEPS = [
   {
     step: "01",
     title: "Configura i livelli",
-    text: "Imposta i livelli di prezzo XAUUSD che vuoi monitorare — Entry, Stop Loss, Take Profit o soglie personalizzate.",
+    text: "Imposta i livelli di prezzo XAUUSD che vuoi monitorare — Entry, SL e TP, oppure soglie personalizzate.",
   },
   {
     step: "02",

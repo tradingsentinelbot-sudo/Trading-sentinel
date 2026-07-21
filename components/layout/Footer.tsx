@@ -19,12 +19,12 @@ export function Footer() {
       <div className="container-sentinel py-14">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2.5">
+            <a href="/" className="flex items-center gap-2.5" aria-label="Trading Sentinel — Home">
               <LogoMark className="h-6 w-6" />
               <span className="font-display text-[15px] font-semibold tracking-tight text-ink">
                 Trading Sentinel
               </span>
-            </div>
+            </a>
             <p className="max-w-xs text-[13px] leading-relaxed text-ink-faint">
               Strumento di monitoraggio operativo per XAUUSD. Non è un servizio di
               consulenza finanziaria e non esegue operazioni di trading.

@@ -38,7 +38,7 @@ export function Navbar() {
       )}
     >
       <nav className="container-sentinel flex h-16 items-center justify-between md:h-20">
-        <a href="#top" className="flex items-center gap-2.5" aria-label="Trading Sentinel — Home">
+        <a href="/" className="flex items-center gap-2.5" aria-label="Trading Sentinel — Home">
           <LogoMark className="h-7 w-7" />
           <span className="font-display text-[15px] font-semibold tracking-tight text-ink">
             Trading Sentinel

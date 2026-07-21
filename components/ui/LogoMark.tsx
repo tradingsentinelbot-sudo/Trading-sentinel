@@ -1,6 +1,7 @@
 /**
- * LogoMark — simbolo del brand costruito interamente in SVG.
- * Concept: nodo centrale con linee di connessione (rif. Fase 03/06-B — Hero Scene).
+ * Trading Sentinel mark.
+ * Abstract architectural symbol: compressed planes around a central axis.
+ * No circular sentinel / radial Matrix-like geometry.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -11,23 +12,40 @@ export function LogoMark({ className }: { className?: string }) {
       className={className}
       aria-hidden
     >
-      <circle cx="16" cy="16" r="15" stroke="url(#sentinel-ring)" strokeWidth="1.4" />
-      <circle cx="16" cy="16" r="4.5" fill="url(#sentinel-core)" />
       <path
-        d="M16 4.5V9M16 23V27.5M4.5 16H9M23 16H27.5"
-        stroke="#3D7DFA"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        opacity="0.6"
+        d="M7 8.5 16 5l9 3.5v15L16 27l-9-3.5v-15Z"
+        stroke="url(#sentinel-metal)"
+        strokeWidth="1.25"
+        strokeLinejoin="miter"
       />
+      <path
+        d="M7 8.5 16 12l9-3.5M16 12v15"
+        stroke="url(#sentinel-blue)"
+        strokeWidth="1.1"
+        strokeLinejoin="miter"
+      />
+      <path
+        d="M10.5 11.5 16 14l5.5-2.5v8L16 22l-5.5-2.5v-8Z"
+        stroke="url(#sentinel-core)"
+        strokeWidth="1.05"
+        strokeLinejoin="miter"
+        opacity="0.92"
+      />
+      <path d="M16 14v8" stroke="#D8E0EA" strokeWidth="0.9" opacity="0.72" />
       <defs>
-        <radialGradient id="sentinel-core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16 16) rotate(90) scale(4.5)">
-          <stop stopColor="#7FA8FF" />
-          <stop offset="1" stopColor="#3D7DFA" />
-        </radialGradient>
-        <linearGradient id="sentinel-ring" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#3D7DFA" stopOpacity="0.7" />
-          <stop offset="1" stopColor="#3D7DFA" stopOpacity="0.05" />
+        <linearGradient id="sentinel-metal" x1="7" y1="6" x2="25" y2="27" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#E5EAF0" stopOpacity="0.92" />
+          <stop offset="0.5" stopColor="#8E9AAA" stopOpacity="0.72" />
+          <stop offset="1" stopColor="#46515E" stopOpacity="0.48" />
+        </linearGradient>
+        <linearGradient id="sentinel-blue" x1="8" y1="8" x2="24" y2="25" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#9AB8FF" />
+          <stop offset="1" stopColor="#3D7DFA" stopOpacity="0.48" />
+        </linearGradient>
+        <linearGradient id="sentinel-core" x1="10" y1="11" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#D7E2FF" />
+          <stop offset="0.45" stopColor="#6D98FF" />
+          <stop offset="1" stopColor="#3D7DFA" stopOpacity="0.58" />
         </linearGradient>
       </defs>
     </svg>
