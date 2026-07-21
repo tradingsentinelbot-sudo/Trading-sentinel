@@ -38,7 +38,7 @@ export function Section({
     >
       {variant === "spotlight" && (
         <div
-          aria-hidden="true"
+          aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(61,125,250,0.12)_0%,rgba(10,11,13,0)_70%)]"
         />
       )}
@@ -58,11 +58,12 @@ export function Section({
               </span>
             )}
             {title && (
-              <h2 className="text-section-mobile md:text-section-desktop font-display font-semibold text-ink">
-                {title}
-              </h2>
-              <div aria-hidden="true"
-		 className="premium-rule mt-2 h-px w-24 opacity-70" />
+              <>
+                <h2 className="text-section-mobile md:text-section-desktop font-display font-semibold text-ink">
+                  {title}
+                </h2>
+                <div aria-hidden="true" className="premium-rule mt-2 h-px w-24 opacity-70" />
+              </>
             )}
             {subtitle && (
               <p className="text-body-mobile md:text-body-desktop text-ink-muted">
