@@ -154,3 +154,10 @@ lib/                    # Utility (cn, rng seedato, ...)
 - [ ] Fase 12 — SEO, favicon, Open Graph, rifinitura performance/accessibilità
 
 Documentazione di riferimento vincolante: Fase 00–07 (congelate).
+
+### Stato implementazione 2026-07-21
+- Corretto il confine Server/Client per i componenti che importano `motion/react` (`Solution` e `HowItWorks`), causa dell'errore di prerendering `createMotionComponent()`.
+- Riattivato il Canvas 3D persistente dietro l'interfaccia DOM. La Hero non usa più `hero-artifact.png` come immagine in colonna: il visual vive come ambiente di scena.
+- Attivata la variante controllata del cubo di vetro come baseline visiva temporanea, con atmosfera, luce e materiali coerenti con la direzione tecnologica premium.
+- Le CTA restano centralizzate in `lib/commercialCta.ts` e sono pronte per il futuro URL del Bot Manager Telegram tramite variabile d'ambiente.
+

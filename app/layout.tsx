@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Sistema 3D (SceneCanvas + Digital Sculpture) congelato su richiesta
-// esplicita: design in attesa di revisione con strumenti di verifica
-// visiva adeguati. Codice preservato in components/background/, non
-// rimosso. Per riattivarlo: reintrodurre l'import e <SceneCanvasClientOnly />.
-// import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
+// Ambiente 3D persistente della Hero: il Canvas vive dietro l'interfaccia DOM
+// e viene montato una sola volta, come richiesto dalla direzione tecnica.
+import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <SceneCanvasClientOnly />
+        {children}
+      </body>
     </html>
   );
 }

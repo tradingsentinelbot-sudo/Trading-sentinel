@@ -138,7 +138,7 @@ export const FRACTURE_FAMILY_JITTER = 0.11;
  * screenshot di riferimento; "keystone" = concept Keystone Compresso.
  */
 export type SculptureVariant = "keystone" | "cube" | "fracture";
-export const ACTIVE_SCULPTURE: SculptureVariant = "fracture";
+export const ACTIVE_SCULPTURE: SculptureVariant = "cube";
 
 export const TIER_SETTINGS: Record<
   QualityTier,

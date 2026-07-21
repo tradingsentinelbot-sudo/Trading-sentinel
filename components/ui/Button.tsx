@@ -28,13 +28,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
           variant === "primary" && [
-            "bg-gradient-to-b from-sentinel-400 to-sentinel-600 text-white shadow-glow-sm",
-            "hover:from-sentinel-400 hover:to-sentinel-500 hover:shadow-glow hover:-translate-y-0.5",
+            "bg-[linear-gradient(135deg,#5C93FF_0%,#3D7DFA_52%,#2C63E0_100%)] text-white shadow-glow-sm",
+            "hover:brightness-110 hover:shadow-glow hover:-translate-y-0.5",
             "active:translate-y-0 active:shadow-glow-sm",
           ],
           variant === "secondary" && [
-            "border border-silver/25 bg-transparent text-ink",
-            "hover:border-silver/50 hover:bg-white/[0.04] hover:-translate-y-0.5",
+            "border border-silver/30 bg-white/[0.025] text-ink backdrop-blur-sm",
+            "hover:border-silver/55 hover:bg-white/[0.055] hover:-translate-y-0.5",
           ],
           className
         )}

@@ -29,9 +29,9 @@ export function Section({
       id={id}
       className={cn(
         "relative section-padding overflow-hidden",
-        variant === "dark" && "bg-obsidian",
-        variant === "graphite" && "bg-graphite",
-        variant === "spotlight" && "bg-obsidian",
+        variant === "dark" && "bg-transparent",
+        variant === "graphite" && "bg-graphite/35",
+        variant === "spotlight" && "bg-transparent",
         className
       )}
       {...props}

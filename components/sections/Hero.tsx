@@ -1,36 +1,40 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { StatusIndicator } from "@/components/ui/StatusIndicator";
 import { staggerContainer, fadeUp } from "@/components/motion/variants";
 import { resolveCommercialCTA } from "@/lib/commercialCta";
 
 /**
- * Hero — prima impressione e conversione (04.3 / 05.2).
+ * Hero — testo e conversione sopra l'ambiente 3D persistente.
  *
- * Sistema 3D (Digital Sculpture / SceneCanvas) congelato su richiesta
- * esplicita, in attesa di revisione estetica con strumenti di verifica
- * visiva adeguati — codice preservato in components/background/, non
- * rimosso. L'elemento visivo della Hero è, provvisoriamente, l'immagine
- * statica fornita.
- *
- * Desktop: testo nella metà sinistra, immagine nella colonna destra.
- * Mobile: badge → titolo → testo → CTA → immagine.
- * Entrata progressiva: badge, titolo, testo, pulsanti, poi l'immagine.
+ * La scena non è un'immagine dentro una colonna: vive dietro l'interfaccia,
+ * come ambiente continuo. Il contenuto resta leggibile grazie a una zona di
+ * contrasto locale, non a un pannello opaco che nasconde l'artefatto.
  */
 export function Hero() {
   const router = useRouter();
+
   return (
-    <section className="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44">
-      <div className="container-sentinel grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-8">
+    <section className="relative isolate min-h-[min(900px,100svh)] overflow-hidden pt-28 md:pt-36">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_70%_at_22%_48%,rgba(10,11,13,0.96)_0%,rgba(10,11,13,0.82)_38%,rgba(10,11,13,0.32)_68%,transparent_100%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent"
+      />
+
+      <div className="container-sentinel relative flex min-h-[calc(min(900px,100svh)-7rem)] items-center">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="flex flex-col items-start text-left"
+          className="relative z-10 max-w-[720px] pb-20 md:pb-28"
         >
           <motion.div variants={fadeUp}>
             <Badge variant="accent">XAUUSD Trading Assistant</Badge>
@@ -38,23 +42,23 @@ export function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-hero-mobile md:text-hero-desktop font-display font-semibold text-ink"
+            className="mt-7 max-w-[760px] text-hero-mobile font-display font-semibold tracking-[-0.035em] text-ink md:text-hero-desktop"
           >
             Monitora il tuo trade.
             <br />
-            Senza restare davanti al grafico.
+            <span className="text-ink/95">Senza restare davanti al grafico.</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="mt-6 max-w-md text-body-mobile md:text-body-desktop text-ink-muted"
+            className="mt-7 max-w-[560px] text-body-mobile text-ink-muted md:text-body-desktop"
           >
             Trading Sentinel controlla il prezzo dell&apos;Oro in tempo reale e ti invia
             notifiche operative direttamente su Telegram quando vengono raggiunti livelli
             importanti.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
+          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-4">
             <Button variant="primary" size="lg" onClick={() => router.push(resolveCommercialCTA().href)}>
               Inizia la Free Trial di 72 ore
             </Button>
@@ -66,22 +70,12 @@ export function Hero() {
               Scopri come funziona
             </Button>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto w-full max-w-[440px] overflow-hidden rounded-card md:max-w-none"
-        >
-          <Image
-            src="/hero-artifact.png"
-            alt="Trading Sentinel — entità digitale, artefatto centrale della Hero"
-            width={1024}
-            height={1536}
-            priority
-            className="h-auto w-full object-contain"
-          />
+          <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-5">
+            <StatusIndicator label="Monitoring XAUUSD" />
+            <span className="h-1 w-1 rounded-full bg-silver/40" aria-hidden />
+            <span className="text-micro text-ink-faint">Decisioni sempre tue</span>
+          </motion.div>
         </motion.div>
       </div>
     </section>

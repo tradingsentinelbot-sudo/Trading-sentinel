@@ -30,23 +30,23 @@ export function SceneCanvas() {
   const settings = TIER_SETTINGS[effectiveTier];
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
+    <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.92]" aria-hidden>
       <Canvas
         frameloop={reducedMotion ? "demand" : "always"}
         dpr={settings.dpr}
         gl={{ antialias: true, powerPreference: "high-performance" }}
-        camera={{ fov: 32, position: [0.6, 0.35, 5.2] }}
+        camera={{ fov: 34, position: [0.72, 0.25, 5.4] }}
         onCreated={({ camera }) => {
           camera.layers.enableAll();
         }}
       >
         <PerformanceMonitor onDecline={() => setDegraded(true)} />
-        <color attach="background" args={["#0A0B0D"]} />
-        <fog attach="fog" args={["#0A0B0D", 4, 9]} />
+        <color attach="background" args={["#07090D"]} />
+        <fog attach="fog" args={["#07090D", 4.5, 10]} />
 
-        <ambientLight intensity={0.25} />
-        <hemisphereLight args={["#3D7DFA", "#0A0B0D", 0.55]} />
-        <directionalLight position={[2, 3, 2]} intensity={0.8} color="#EAF1FF" />
+        <ambientLight intensity={0.18} />
+        <hemisphereLight args={["#6D91D8", "#07090D", 0.62]} />
+        <directionalLight position={[2, 3, 2]} intensity={1.05} color="#EAF1FF" />
         <directionalLight position={[-2, -1, -1.5]} intensity={0.25} color={"#3D7DFA"} />
 
         {settings.transmissionMaterial && (

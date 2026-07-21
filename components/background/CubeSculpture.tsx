@@ -16,8 +16,8 @@ import { useControlledStillness } from "@/hooks/useControlledStillness";
  * confronto diretto — non sostituisce la Bible concettuale, la affianca.
  */
 
-const OUTER_SIZE = 0.85;
-const INNER_SIZE = 0.42;
+const OUTER_SIZE = 1.05;
+const INNER_SIZE = 0.48;
 
 function NestedCube({ useTransmission }: { useTransmission: boolean }) {
   const outerRef = useRef<any>(null);
@@ -44,7 +44,7 @@ function NestedCube({ useTransmission }: { useTransmission: boolean }) {
             roughness={0.06}
             ior={1.38}
             chromaticAberration={0.012}
-            color="#5C93FF"
+            color="#B8C9E8"
             attenuationColor="#3D7DFA"
             attenuationDistance={0.8}
             transparent
@@ -64,7 +64,7 @@ function NestedCube({ useTransmission }: { useTransmission: boolean }) {
             roughness={0.04}
             ior={1.42}
             chromaticAberration={0.01}
-            color="#EAF1FF"
+            color="#DCE8F5"
             attenuationColor="#5C93FF"
             attenuationDistance={0.6}
             transparent
@@ -149,8 +149,8 @@ function Sparkles({ count }: { count: number }) {
 export function CubeSculpture({ tier }: { tier: QualityTier }) {
   const useTransmission = tier !== "mobile";
   const reflectiveGround = tier !== "mobile";
-  const beamCount = tier === "desktop" ? 10 : tier === "tablet" ? 7 : 4;
-  const sparkleCount = tier === "desktop" ? 90 : tier === "tablet" ? 55 : 30;
+  const beamCount = tier === "desktop" ? 8 : tier === "tablet" ? 6 : 3;
+  const sparkleCount = tier === "desktop" ? 42 : tier === "tablet" ? 24 : 12;
 
   return (
     <group position={SCULPTURE_WORLD_POSITION}>
