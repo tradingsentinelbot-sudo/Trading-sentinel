@@ -39,6 +39,17 @@ const config: Config = {
         },
         silver: {
           DEFAULT: "#C7CCD4", // Metallic Silver
+          bright: "#E7EBF0",
+          dark: "#7F8996",
+        },
+        amber: {
+          DEFAULT: "#D6A84A",
+          soft: "#E5C477",
+          deep: "#8C6825",
+        },
+        emerald: {
+          DEFAULT: "#18C78F",
+          soft: "#65E0B8",
         },
         positive: {
           DEFAULT: "#22C55E", // Emerald Green — uso limitato
@@ -70,8 +81,10 @@ const config: Config = {
         control: "12px",
       },
       boxShadow: {
-        glow: "0 0 40px -8px rgba(61,125,250,0.45)",
-        "glow-sm": "0 0 20px -6px rgba(61,125,250,0.35)",
+        glow: "0 0 40px -8px rgba(61,125,250,0.32)",
+        "glow-sm": "0 0 20px -6px rgba(61,125,250,0.24)",
+        "metal-soft": "0 12px 45px -24px rgba(199,204,212,0.28)",
+        "amber-soft": "0 0 34px -16px rgba(214,168,74,0.5)",
         soft: "0 8px 30px -12px rgba(0,0,0,0.5)",
       },
       backdropBlur: {

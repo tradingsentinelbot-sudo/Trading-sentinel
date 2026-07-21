@@ -23,6 +23,15 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
+  const handleSectionNavigation = (href: string) => {
+    setMenuOpen(false);
+    const id = href.replace("#", "");
+    window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", href);
+    }, 50);
+  };
+
   // Chiude il menu mobile se la viewport torna desktop (stesso comportamento di prima)
   useEffect(() => {
     if (isDesktop) setMenuOpen(false);
@@ -97,7 +106,10 @@ export function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleSectionNavigation(link.href);
+                    }}
                     className="block rounded-control px-2 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
                   >
                     {link.label}
@@ -107,7 +119,10 @@ export function Navbar() {
               <li>
                 <a
                   href="/accedi"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    router.push("/accedi");
+                  }}
                   className="block rounded-control px-2 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-white/[0.04] hover:text-ink"
                 >
                   Accedi

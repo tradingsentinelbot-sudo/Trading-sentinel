@@ -48,9 +48,10 @@ export function Solution() {
           <motion.div
             key={point.title}
             variants={fadeUp}
-            className="rounded-card border border-white/[0.06] bg-white/[0.03] p-7 transition-colors duration-300 hover:border-sentinel-500/25 hover:bg-white/[0.05]"
+            className="group relative rounded-card border border-white/[0.08] bg-gradient-to-br from-white/[0.045] via-white/[0.02] to-transparent p-7 transition-all duration-300 hover:border-silver/25 hover:shadow-metal-soft"
           >
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-control bg-gradient-to-b from-sentinel-500/20 to-sentinel-600/10 text-sentinel-400">
+            <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-silver/25 to-transparent" />
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-control border border-silver/15 bg-gradient-to-br from-silver/10 via-white/[0.03] to-amber/10 text-silver transition-colors group-hover:text-amber-soft">
               <point.icon size={20} strokeWidth={1.6} />
             </div>
             <h3 className="text-[17px] font-semibold text-ink">{point.title}</h3>

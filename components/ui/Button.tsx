@@ -28,7 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
           variant === "primary" && [
-            "bg-[linear-gradient(135deg,#5C93FF_0%,#3D7DFA_52%,#2C63E0_100%)] text-white shadow-glow-sm",
+            "bg-[linear-gradient(135deg,#E4E8EE_0%,#B9C1CC_28%,#5C93FF_68%,#2C63E0_100%)] text-[#07101E] shadow-glow-sm",
             "hover:brightness-110 hover:shadow-glow hover:-translate-y-0.5",
             "active:translate-y-0 active:shadow-glow-sm",
           ],

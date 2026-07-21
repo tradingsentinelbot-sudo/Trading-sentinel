@@ -16,7 +16,7 @@ const PLANS = [
       "Monitoraggio XAUUSD in tempo reale",
       "Fino a 3 posizioni in parallelo",
       "Fino a 2 alert operativi configurabili",
-      "Entry, SL e TP personalizzati",
+      "Mantenimento overnight delle posizioni",
       "Notifiche operative su Telegram",
     ],
     highlighted: false,
@@ -27,10 +27,9 @@ const PLANS = [
     description: "Per chi ha bisogno di una supervisione più ampia e di maggiore flessibilità operativa.",
     features: [
       "Tutto quanto incluso in Basic",
-      "Maggiore capacità di monitoraggio multi-posizione",
-      "Alert e soglie operative più avanzate",
-      "Configurazione pensata per flussi di trading più complessi",
-      "Supporto prioritario",
+      "Maggiore capacità di monitoraggio fino a 5 posizioni",
+      "Livelli e soglie dei trade personalizzabili",
+      "Storico delle ultime 10 notifiche",
     ],
     highlighted: true,
   },
@@ -45,7 +44,7 @@ export function Pricing() {
       variant="dark"
       align="center"
       eyebrow="Versioni"
-      title="Basic o Pro"
+      title="Basic & Pro"
       subtitle="Stesso principio di fondo — osservazione, non automazione. Cambia solo quanto puoi monitorare in parallelo."
     >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

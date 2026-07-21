@@ -53,7 +53,7 @@ export function Section({
             )}
           >
             {eyebrow && (
-              <span className="text-micro font-medium uppercase tracking-[0.14em] text-sentinel-400">
+              <span className="text-micro font-medium uppercase tracking-[0.14em] text-silver">
                 {eyebrow}
               </span>
             )}
@@ -61,6 +61,7 @@ export function Section({
               <h2 className="text-section-mobile md:text-section-desktop font-display font-semibold text-ink">
                 {title}
               </h2>
+              <div aria-hidden className="premium-rule mt-2 h-px w-24 opacity-70" />
             )}
             {subtitle && (
               <p className="text-body-mobile md:text-body-desktop text-ink-muted">
