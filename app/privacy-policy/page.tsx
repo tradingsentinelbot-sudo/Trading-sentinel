@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalPageLayout title="Privacy Policy" lastUpdated="[DATA]">
+    <LegalPageLayout title="Privacy Policy" lastUpdated="22 luglio 2026">
       <LegalSection title="1. Introduzione">
         <p>
           Trading Sentinel rispetta la privacy degli utenti e si impegna a trattare i dati
@@ -91,16 +91,6 @@ export default function PrivacyPolicyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="8. Diritti dell'utente">
-        <p>L&apos;utente può richiedere:</p>
-        <LegalList
-          items={["accesso ai propri dati;", "modifica delle informazioni;", "cancellazione dei dati quando applicabile."]}
-        />
-      </LegalSection>
-
-      <LegalSection title="9. Contatti">
-        <p>Per richieste relative alla privacy: [INSERIRE EMAIL UFFICIALE]</p>
-      </LegalSection>
     </LegalPageLayout>
   );
 }

@@ -2,11 +2,17 @@
 
 import dynamic from "next/dynamic";
 
-const SceneCanvas2D = dynamic(
-  () => import("@/components/background/SceneCanvas2D").then((m) => m.SceneCanvas2D),
+/**
+ * Import dinamico con ssr:false: il Canvas WebGL non deve mai essere
+ * renderizzato lato server. Isolato in un proprio file perché
+ * `next/dynamic(..., { ssr:false })` non è consentito dentro un Server
+ * Component come app/layout.tsx.
+ */
+const SceneCanvas = dynamic(
+  () => import("@/components/background/SceneCanvas").then((m) => m.SceneCanvas),
   { ssr: false }
 );
 
 export function SceneCanvasClientOnly() {
-  return <SceneCanvas2D />;
+  return <SceneCanvas />;
 }

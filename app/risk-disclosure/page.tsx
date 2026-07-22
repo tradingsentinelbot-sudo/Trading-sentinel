@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function RiskDisclosurePage() {
   return (
-    <LegalPageLayout title="Risk Disclosure" lastUpdated="[DATA]">
+    <LegalPageLayout title="Risk Disclosure" lastUpdated="22 luglio 2026">
       <LegalSection title="1. Introduzione">
         <p>
           Trading Sentinel è uno strumento software progettato per assistere il trader nel
