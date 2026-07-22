@@ -150,10 +150,11 @@ export function SceneCanvas2D() {
           context.restore();
         });
 
-        // Monolith: crop only the actual structure from the source cutout.
-        const source = { x: 180, y: 0, width: 300, height: 380 };
+        // Monolith: use the complete alpha-bounded structure.
+        // Do not crop an arbitrary source rectangle here: the reference
+        // silhouette must remain intact, including the full left wing.
         const monoH = Math.min(h * 0.86, 760);
-        const monoW = monoH * (source.width / source.height);
+        const monoW = monoH * (monolith.width / monolith.height);
         const monoX = w * 0.59 + pointerRef.current.x * 20 + p * 42;
         const monoY = h * 0.05 + pointerRef.current.y * -12 + p * -24;
         const monoScale = 0.96 + Math.sin(t * 0.12) * 0.006;
@@ -163,10 +164,6 @@ export function SceneCanvas2D() {
         context.rotate(Math.sin(t * 0.08) * 0.003 + p * 0.012);
         context.drawImage(
           monolith,
-          source.x,
-          source.y,
-          source.width,
-          source.height,
           -monoW / 2,
           0,
           monoW * monoScale,
