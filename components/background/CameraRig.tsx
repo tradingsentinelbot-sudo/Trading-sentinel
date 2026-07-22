@@ -73,8 +73,8 @@ export function CameraRig({
     const drift = wander3(t, 0, CAMERA_PRESENCE.positionAmplitude);
     const lookDrift = wander3(t, 100, CAMERA_PRESENCE.lookAtAmplitude);
 
-    const pointerOffsetX = pointerParallax ? pointer.current.x * 0.06 : 0;
-    const pointerOffsetY = pointerParallax ? pointer.current.y * -0.04 : 0;
+    const pointerOffsetX = pointerParallax ? pointer.current.x * 0.085 : 0;
+    const pointerOffsetY = pointerParallax ? pointer.current.y * -0.055 : 0;
 
     const desiredPos = targetRef.current
       .clone()

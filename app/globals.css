@@ -46,13 +46,25 @@
 
 
   .button-metal-primary {
-    background: linear-gradient(145deg, #d9e1eb 0%, #91a7c2 38%, #4d7cff 100%);
-    border: 1px solid rgba(220, 232, 247, 0.45);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), inset 0 -8px 18px rgba(20,45,90,0.22);
+    background:
+      linear-gradient(180deg, rgba(234,234,234,0.18) 0%, rgba(183,184,194,0.08) 18%, transparent 44%),
+      linear-gradient(145deg, #252A31 0%, #171B20 48%, #0E1115 100%);
+    border: 1px solid rgba(183,184,194,0.48);
+    box-shadow:
+      inset 0 1px 0 rgba(234,234,234,0.42),
+      inset 0 -10px 18px rgba(0,0,0,0.34),
+      0 12px 30px -20px rgba(0,0,0,0.9);
   }
 
   .button-metal-secondary {
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -10px 22px rgba(33,55,82,0.12), 0 10px 28px -20px rgba(77,124,255,0.45);
+    background:
+      linear-gradient(180deg, rgba(234,234,234,0.08), transparent 34%),
+      linear-gradient(145deg, rgba(42,52,66,0.30), rgba(10,12,15,0.72));
+    border: 1px solid rgba(183,184,194,0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(234,234,234,0.16),
+      inset 0 -10px 22px rgba(0,0,0,0.26),
+      0 12px 30px -24px rgba(0,0,0,0.9);
   }
 
   .status-pulse {
@@ -70,7 +82,7 @@
       90deg,
       transparent 0%,
       rgba(199,204,212,0.22) 22%,
-      rgba(111,137,168,0.5) 50%,
+      rgba(42,52,66,0.62) 50%,
       rgba(199,204,212,0.22) 78%,
       transparent 100%
     );
