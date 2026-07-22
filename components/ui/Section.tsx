@@ -39,7 +39,7 @@ export function Section({
       {variant === "spotlight" && (
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(214,168,74,0.12)_0%,rgba(10,11,13,0)_70%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(61,125,250,0.12)_0%,rgba(10,11,13,0)_70%)]"
         />
       )}
 

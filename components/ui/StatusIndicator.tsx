@@ -23,13 +23,13 @@ export function StatusIndicator({ label, tone = "active", className }: StatusInd
         <span
           className={cn(
             "absolute inline-flex h-full w-full animate-pulse-glow rounded-full",
-            tone === "active" ? "status-pulse" : "bg-ink-faint"
+            tone === "active" ? "bg-positive" : "bg-ink-faint"
           )}
         />
         <span
           className={cn(
             "relative inline-flex h-2 w-2 rounded-full",
-            tone === "active" ? "status-pulse" : "bg-ink-faint"
+            tone === "active" ? "bg-positive" : "bg-ink-faint"
           )}
         />
       </span>

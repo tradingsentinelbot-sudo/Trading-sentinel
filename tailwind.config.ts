@@ -30,12 +30,12 @@ const config: Config = {
           faint: "#6B7280",
         },
         sentinel: {
-          DEFAULT: "#C58B2A", // Amber Gold — accent primario
-          50: "#FFF5D8",
-          400: "#E5C477",
-          500: "#C58B2A",
-          600: "#A66F1B",
-          700: "#7D5114",
+          DEFAULT: "#3D7DFA", // Sentinel Blue — accent primario
+          50: "#EAF1FF",
+          400: "#5C93FF",
+          500: "#3D7DFA",
+          600: "#2C63E0",
+          700: "#214DB3",
         },
         silver: {
           DEFAULT: "#C7CCD4", // Metallic Silver
@@ -81,8 +81,8 @@ const config: Config = {
         control: "12px",
       },
       boxShadow: {
-        glow: "0 0 40px -8px rgba(197,139,42,0.24)",
-        "glow-sm": "0 0 20px -6px rgba(197,139,42,0.18)",
+        glow: "0 0 40px -8px rgba(61,125,250,0.32)",
+        "glow-sm": "0 0 20px -6px rgba(61,125,250,0.24)",
         "metal-soft": "0 12px 45px -24px rgba(199,204,212,0.28)",
         "amber-soft": "0 0 34px -16px rgba(214,168,74,0.5)",
         soft: "0 8px 30px -12px rgba(0,0,0,0.5)",

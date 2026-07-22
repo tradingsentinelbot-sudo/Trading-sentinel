@@ -32,8 +32,8 @@ export const CAMERA_WAYPOINTS: CameraWaypoint[] = [
 
 /** Ampiezza di Camera Presence — spostamenti minimi, mai un'orbita. */
 export const CAMERA_PRESENCE = {
-  positionAmplitude: 0.035,
-  lookAtAmplitude: 0.02,
+  positionAmplitude: 0.055,
+  lookAtAmplitude: 0.028,
 };
 
 /** Posizione mondo della Digital Sculpture (fissa: è la camera a muoversi). */
@@ -149,7 +149,7 @@ export const TIER_SETTINGS: Record<
     pointerParallax: boolean;
   }
 > = {
-  desktop: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: true },
+  desktop: { dpr: [1, 2], transmissionMaterial: true, postProcessing: true, pointerParallax: true },
   tablet: { dpr: [1, 1.5], transmissionMaterial: true, postProcessing: false, pointerParallax: false },
   mobile: { dpr: [1, 1.5], transmissionMaterial: false, postProcessing: false, pointerParallax: false },
 };

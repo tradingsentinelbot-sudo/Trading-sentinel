@@ -16,7 +16,7 @@ export function Problem() {
 
           <div className="mt-8 flex flex-col gap-4 text-body-mobile md:text-body-desktop text-ink-muted">
             <p>Ogni trader conosce questa situazione.</p>
-            <p>Apri una posizione. Imposti Entry, SL e TP.</p>
+            <p>Apri una posizione. Imposti Entry e Stop Loss.</p>
             <p>Poi devi continuare la giornata.</p>
             <p>
               Il mercato si muove, ma per sapere cosa succede devi tornare continuamente

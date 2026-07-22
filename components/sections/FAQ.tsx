@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "Qual è la differenza tra Basic e Pro?",
-    a: "Basic monitora fino a 3 posizioni in parallelo e fino a 2 alert operativi. Pro aumenta la capacità di monitoraggio fino a 5 posizioni e aggiunge soglie personalizzabili e storico delle notifiche. Dettagli nella sezione Versioni.",
+    a: "Basic monitora una posizione alla volta. Pro consente il monitoraggio di più posizioni in parallelo con soglie avanzate. Dettagli nella sezione Versioni.",
   },
 ];
 
