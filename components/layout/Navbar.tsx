@@ -67,12 +67,13 @@ export function Navbar() {
         <ul className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
+              <button
+                type="button"
+                onClick={() => handleSectionNavigation(link.href)}
                 className="text-[14px] font-medium text-ink-muted transition-colors duration-200 hover:text-ink"
               >
                 {link.label}
-              </a>
+              </button>
             </li>
           ))}
           <li>

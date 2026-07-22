@@ -22,8 +22,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "group relative inline-flex items-center justify-center gap-2 rounded-control font-medium",
+          "sentinel-button group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-control font-medium",
           "transition-all duration-300 ease-sentinel",
+          "before:pointer-events-none before:absolute before:inset-y-0 before:-left-1/2 before:w-1/2 before:-skew-x-12 before:bg-white/35 before:opacity-0 before:blur-md before:transition-all before:duration-700 before:content-[\"\"] group-hover:before:left-[115%] group-hover:before:opacity-100",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sentinel-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian",
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
@@ -40,7 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {children}
+        <span className="relative z-[1]">{children}</span>
       </button>
     );
   }

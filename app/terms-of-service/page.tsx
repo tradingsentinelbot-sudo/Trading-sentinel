@@ -101,11 +101,8 @@ export default function TermsOfServicePage() {
       </LegalSection>
 
       <LegalSection title="9. Contatti">
-        <p>Per informazioni relative al servizio, accedi a Telegram:</p>
-        <a
-          href="/accedi"
-          className="inline-flex w-fit items-center justify-center rounded-full border border-ink-faint/40 bg-ink/5 px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-ink/10"
-        >
+        <p>Per informazioni relative al servizio:</p>
+        <a href="/accedi" className="font-medium text-sentinel-400 underline underline-offset-2">
           Accedere a Telegram
         </a>
       </LegalSection>

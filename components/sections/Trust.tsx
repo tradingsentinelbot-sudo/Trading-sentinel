@@ -17,7 +17,7 @@ const TRUST_POINTS = [
   {
     icon: FileText,
     title: "Termini chiari, senza sorprese",
-    text: "Licenza, rinnovo e limiti di ogni piano sono descritti nei Termini di Servizio, non nascosti in una sezione secondaria.",
+    text: "Licenza, rinnovo e limiti di ogni piano sono descritti nei Termini di Servizio.",
   },
 ];
 

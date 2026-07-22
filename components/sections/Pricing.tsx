@@ -30,6 +30,8 @@ const PLANS = [
       "Maggiore capacità di monitoraggio fino a 5 posizioni",
       "Livelli e soglie dei trade personalizzabili",
       "Storico delle ultime 10 notifiche",
+      "Maggiore robustezza tecnica del codice",
+      "Report operativo",
     ],
     highlighted: true,
   },
