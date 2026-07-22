@@ -3,7 +3,6 @@
 import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, PerformanceMonitor } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { CameraRig } from "@/components/background/CameraRig";
 import { DigitalSculpture3D } from "@/components/background/DigitalSculpture3D";
 import { TIER_SETTINGS, type QualityTier } from "@/constants/scene";
@@ -33,7 +32,7 @@ export function SceneCanvas() {
     <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.92]" aria-hidden>
       <Canvas
         frameloop={reducedMotion ? "demand" : "always"}
-        dpr={settings.dpr}
+        dpr={settings.dpr[1] > 1.5 ? [1, 1.5] : settings.dpr}
         gl={{ antialias: true, powerPreference: "high-performance" }}
         camera={{ fov: 34, position: [0.72, 0.25, 5.4] }}
         onCreated={({ camera }) => {
@@ -42,10 +41,10 @@ export function SceneCanvas() {
       >
         <PerformanceMonitor onDecline={() => setDegraded(true)} />
         <color attach="background" args={["#080A0D"]} />
-        <fog attach="fog" args={["#080A0D", 5.5, 15]} />
+        <fog attach="fog" args={["#080A0D", 4.5, 10]} />
 
-        <ambientLight intensity={0.22} />
-        <hemisphereLight args={["#7B8EA8", "#07090D", 0.62]} />
+        <ambientLight intensity={0.14} />
+        <hemisphereLight args={["#7B8EA8", "#07090D", 0.48]} />
         <directionalLight position={[2, 3, 2]} intensity={1.05} color="#EAEAEA" />
         <directionalLight position={[-2, -1, -1.5]} intensity={0.16} color="#536273" />
         <pointLight position={[0.45, 1.1, 1.7]} intensity={0.58} distance={5.8} color="#D6A84A" />
@@ -59,12 +58,6 @@ export function SceneCanvas() {
         </Suspense>
 
         <CameraRig pointerParallax={settings.pointerParallax && !reducedMotion} />
-
-        {settings.postProcessing && !reducedMotion && (
-          <EffectComposer>
-            <Bloom luminanceThreshold={0.9} intensity={0.4} mipmapBlur radius={0.5} />
-          </EffectComposer>
-        )}
       </Canvas>
     </div>
   );
