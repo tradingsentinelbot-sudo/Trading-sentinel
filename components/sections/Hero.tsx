@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { StatusIndicator } from "@/components/ui/StatusIndicator";
 import { staggerContainer, fadeUp } from "@/components/motion/variants";
 import { resolveCommercialCTA } from "@/lib/commercialCta";
+import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
 
 /**
  * Hero — testo e conversione sopra l'ambiente 3D persistente.
@@ -20,6 +21,9 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[min(900px,100svh)] overflow-hidden pt-28 md:pt-36">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <SceneCanvasClientOnly />
+      </div>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_70%_at_22%_48%,rgba(10,11,13,0.96)_0%,rgba(10,11,13,0.82)_38%,rgba(10,11,13,0.32)_68%,transparent_100%),radial-gradient(28%_34%_at_72%_42%,rgba(214,168,74,0.065)_0%,transparent_72%),radial-gradient(32%_42%_at_84%_22%,rgba(199,204,212,0.065)_0%,transparent_70%)]"

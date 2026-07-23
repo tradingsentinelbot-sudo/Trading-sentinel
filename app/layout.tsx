@@ -4,7 +4,6 @@ import "./globals.css";
 
 // Ambiente 3D persistente della Hero: il Canvas vive dietro l'interfaccia DOM
 // e viene montato una sola volta, come richiesto dalla direzione tecnica.
-import { SceneCanvasClientOnly } from "@/components/background/SceneCanvasClientOnly";
 import { AtmosphericParticles } from "@/components/background/AtmosphericParticles";
 
 const inter = Inter({
@@ -28,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="it" className={inter.variable}>
       <body>
-        <SceneCanvasClientOnly />
         <AtmosphericParticles />
         <div className="ambient-reading-layer" aria-hidden="true" />
         <div className="site-content-layer">{children}</div>
