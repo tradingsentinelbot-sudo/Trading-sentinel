@@ -51,8 +51,8 @@
     z-index: 2;
     pointer-events: none;
     background:
-      linear-gradient(180deg, rgba(102, 108, 116, 0.16), rgba(58, 64, 72, 0.11) 48%, rgba(28, 32, 38, 0.18)),
-      radial-gradient(70% 60% at 50% 42%, rgba(120, 126, 134, 0.07), transparent 70%);
+      linear-gradient(180deg, rgba(128, 134, 142, 0.27), rgba(82, 88, 96, 0.21) 48%, rgba(42, 48, 56, 0.25)),
+      radial-gradient(70% 60% at 50% 42%, rgba(140, 146, 154, 0.12), transparent 70%);
     mix-blend-mode: normal;
   }
 
@@ -68,24 +68,24 @@
     position: absolute;
     display: block;
     border-radius: 999px;
-    background: rgba(199, 204, 212, 0.58);
-    box-shadow: 0 0 10px rgba(199, 204, 212, 0.2);
-    opacity: 0.16;
+    background: rgba(199, 204, 212, 0.76);
+    box-shadow: 0 0 12px rgba(199, 204, 212, 0.34);
+    opacity: 0.28;
     animation: atmospheric-drift linear infinite;
   }
 
   @keyframes atmospheric-drift {
     0%, 100% {
       transform: translate3d(0, 0, 0) scale(0.8);
-      opacity: 0.08;
+      opacity: 0.16;
     }
     45% {
       transform: translate3d(var(--particle-drift), -18px, 0) scale(1);
-      opacity: 0.34;
+      opacity: 0.62;
     }
     75% {
       transform: translate3d(calc(var(--particle-drift) * -0.5), 12px, 0) scale(0.9);
-      opacity: 0.14;
+      opacity: 0.28;
     }
   }
 
