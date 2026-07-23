@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type SectionProps = React.HTMLAttributes<HTMLElement> & {
+type SectionProps = Omit<React.HTMLAttributes<HTMLElement>, "title"> & {
   id?: string;
   variant?: "dark" | "graphite" | "spotlight";
   eyebrow?: string;
