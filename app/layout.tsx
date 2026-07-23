@@ -31,7 +31,7 @@ export default function RootLayout({
         <SceneCanvasClientOnly />
         <AtmosphericParticles />
         <div className="ambient-reading-layer" aria-hidden="true" />
-        {children}
+        <div className="site-content-layer">{children}</div>
       </body>
     </html>
   );

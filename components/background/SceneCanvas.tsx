@@ -29,7 +29,7 @@ export function SceneCanvas() {
   const settings = TIER_SETTINGS[effectiveTier];
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.92]" aria-hidden>
+    <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.92]" aria-hidden>
       <Canvas
         frameloop={reducedMotion ? "demand" : "always"}
         dpr={settings.dpr[1] > 1.5 ? [1, 1.5] : settings.dpr}

@@ -34,7 +34,7 @@ export function HowItWorks() {
       variant="graphite"
       align="center"
       eyebrow="Come funziona"
-      title="Quattro passaggi, non un pannello di controllo"
+      title={<>Quattro passaggi.<span className="block text-[0.64em] leading-[1.08]">Non un pannello di controllo</span></>}
       subtitle="Nessuna curva di apprendimento. Il flusso operativo è deliberatamente semplice."
     >
       <motion.div

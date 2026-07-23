@@ -27,7 +27,7 @@ const TRUST_POINTS = [
  */
 export function Trust() {
   return (
-    <Section id="trust" variant="graphite" align="center" eyebrow="Trasparenza" title="Cosa puoi aspettarti, con chiarezza">
+    <Section id="trust" variant="graphite" align="center" eyebrow="Trasparenza" title="Cosa puoi aspettarti">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {TRUST_POINTS.map((point, i) => (
           <RevealOnScroll key={point.title} delay={i * 0.06}>

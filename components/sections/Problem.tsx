@@ -11,7 +11,7 @@ export function Problem() {
         <div className="max-w-2xl">
           <h2 className="text-section-mobile md:text-section-desktop font-display font-semibold text-ink">
             Il problema non è il mercato.
-            <br />È doverlo controllare continuamente.
+            <br /><span className="text-[0.64em] leading-[1.08]">È doverlo controllare continuamente.</span>
           </h2>
 
           <div className="mt-8 flex flex-col gap-4 text-body-mobile md:text-body-desktop text-ink-muted">

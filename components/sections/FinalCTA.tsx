@@ -15,7 +15,8 @@ export function FinalCTA() {
         <StatusIndicator label="Sentinel Active — Monitoring XAUUSD" />
 
         <h2 className="text-section-mobile md:text-section-desktop font-display font-semibold text-ink">
-          Inizia a monitorare senza restare incollato al grafico
+          Inizia a monitorare
+          <span className="block text-[0.64em] leading-[1.08]">senza restare incollato al grafico.</span>
         </h2>
 
         <p className="text-body-mobile md:text-body-desktop text-ink-muted">

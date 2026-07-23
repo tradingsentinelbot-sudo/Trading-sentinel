@@ -47,7 +47,7 @@ export function Hero() {
           >
             Monitora il tuo trade.
             <br />
-            <span className="text-ink/95">Senza restare davanti al grafico.</span>
+            <span className="block text-[0.64em] leading-[1.08] text-ink/95">Senza restare davanti al grafico.</span>
           </motion.h1>
 
           <motion.p

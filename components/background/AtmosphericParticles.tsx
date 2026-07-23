@@ -1,6 +1,6 @@
 "use client";
 
-const PARTICLES = Array.from({ length: 34 }, (_, i) => ({
+const PARTICLES = Array.from({ length: 64 }, (_, i) => ({
   id: i,
   left: `${(i * 37.7) % 100}%`,
   top: `${(i * 61.3) % 100}%`,

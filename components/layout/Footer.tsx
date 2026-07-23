@@ -5,6 +5,7 @@ const LEGAL_LINKS = [
   { label: "Termini di Servizio", href: "/terms-of-service" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Risk Disclosure", href: "/risk-disclosure" },
+  { label: "FAQ Tecniche", href: "/faq-tecniche" },
 ];
 
 export function Footer() {
@@ -39,16 +40,6 @@ export function Footer() {
             </ul>
           </nav>
         </div>
-
-        <nav aria-label="Risorse tecniche e documentazione legale" className="mt-12 border-t border-white/[0.06] pt-6">
-          <ul className="flex flex-col gap-2.5">
-            <li>
-              <Link href="/faq-tecniche" className="text-[14px] text-ink-muted transition-colors hover:text-ink">
-                FAQ Tecniche
-              </Link>
-            </li>
-          </ul>
-        </nav>
 
         <div className="mt-10 border-t border-white/[0.06] pt-6">
           <p className="text-[12px] leading-relaxed text-ink-faint">
