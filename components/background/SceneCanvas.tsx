@@ -25,17 +25,17 @@ type Layer = {
 
 const LAYERS: Layer[] = [
   // Background: rare, small fragments. They establish the distant field.
-  { key: "backgroundFragments", depth: 0.12, width: 0.20, x: 0.84, y: 0.27, driftX: 7, driftY: 3, rotation: -0.008 },
+  { key: "backgroundFragments", depth: 0.10, width: 0.14, x: 0.86, y: 0.25, driftX: 5, driftY: 2, rotation: -0.006 },
   // Atmospheric dust sits behind the sculpture, not as a second object cluster.
-  { key: "dust", depth: 0.06, width: 0.34, x: 0.77, y: 0.57, driftX: 5, driftY: 3, rotation: 0 },
+  { key: "dust", depth: 0.06, width: 0.40, x: 0.78, y: 0.52, driftX: 4, driftY: 2, rotation: 0 },
   // Midground: a small number of clearly separated masses.
-  { key: "midground", depth: 0.28, width: 0.22, x: 0.84, y: 0.49, driftX: 13, driftY: 6, rotation: 0.01 },
-  { key: "foregroundTop", depth: 0.42, width: 0.24, x: 0.86, y: 0.17, driftX: 18, driftY: 8, rotation: -0.012 },
+  { key: "midground", depth: 0.24, width: 0.15, x: 0.88, y: 0.47, driftX: 9, driftY: 4, rotation: 0.008 },
+  { key: "foregroundTop", depth: 0.38, width: 0.15, x: 0.90, y: 0.18, driftX: 12, driftY: 5, rotation: -0.008 },
   // Lower foreground creates a visual base and frames the hero instead of competing with it.
-  { key: "foregroundBottom", depth: 0.58, width: 0.34, x: 0.25, y: 0.79, driftX: 24, driftY: 10, rotation: 0.008 },
-  { key: "foregroundLower", depth: 0.68, width: 0.22, x: 0.78, y: 0.88, driftX: 30, driftY: 12, rotation: -0.008 },
+  { key: "foregroundBottom", depth: 0.48, width: 0.22, x: 0.24, y: 0.84, driftX: 16, driftY: 7, rotation: 0.006 },
+  { key: "foregroundLower", depth: 0.56, width: 0.15, x: 0.82, y: 0.88, driftX: 20, driftY: 8, rotation: -0.006 },
   // Core: deliberately smaller and further away than the previous pass.
-  { key: "hero", depth: 1, width: 0.43, x: 0.73, y: 0.43, driftX: 38, driftY: 16, rotation: 0.004 },
+  { key: "hero", depth: 1, width: 0.29, x: 0.78, y: 0.40, driftX: 24, driftY: 10, rotation: 0.003 },
 ];
 
 function loadImage(src: string) {
@@ -117,7 +117,8 @@ export function SceneCanvas() {
       context.save();
       context.translate(x + drawWidth / 2, y + drawHeight / 2);
       context.rotate(layer.rotation + pointer.x * 0.003 * layer.depth);
-      context.globalAlpha = layer.key === "hero" ? 0.98 : 0.78 + layer.depth * 0.14;
+      const sceneFade = Math.max(0, 1 - Math.max(0, scrollProgress - 0.18) / 0.72);
+      context.globalAlpha = (layer.key === "hero" ? 0.84 : 0.42 + layer.depth * 0.26) * sceneFade;
       context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
       context.restore();
     };
@@ -149,8 +150,7 @@ export function SceneCanvas() {
         const alpha = 0.18 + (Math.sin(time * 0.001 + particle.phase) + 1) * 0.11;
         context.beginPath();
         context.fillStyle = `rgba(199, 204, 212, ${alpha})`;
-        context.shadowBlur = 7;
-        context.shadowColor = "rgba(199, 204, 212, 0.35)";
+        context.shadowBlur = 0;
         context.arc(x, y, particle.size, 0, Math.PI * 2);
         context.fill();
       }

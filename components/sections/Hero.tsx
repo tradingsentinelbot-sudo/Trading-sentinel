@@ -26,11 +26,11 @@ export function Hero() {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_70%_at_22%_48%,rgba(10,11,13,0.96)_0%,rgba(10,11,13,0.82)_38%,rgba(10,11,13,0.32)_68%,transparent_100%),radial-gradient(28%_34%_at_72%_42%,rgba(214,168,74,0.065)_0%,transparent_72%),radial-gradient(32%_42%_at_84%_22%,rgba(199,204,212,0.065)_0%,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(85%_75%_at_72%_38%,rgba(35,47,58,0.46)_0%,rgba(25,32,40,0.34)_38%,rgba(10,11,13,0.62)_74%,rgba(10,11,13,0.96)_100%),radial-gradient(58%_48%_at_76%_68%,rgba(92,101,110,0.14)_0%,rgba(20,24,29,0.04)_54%,transparent_100%),linear-gradient(180deg,rgba(18,24,30,0.82)_0%,rgba(12,15,19,0.76)_54%,rgba(10,11,13,0.98)_100%)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[42%] bg-gradient-to-t from-obsidian via-obsidian/78 to-transparent"
       />
       <div aria-hidden className="pointer-events-none absolute left-[8%] top-[28%] -z-10 h-px w-[34%] bg-gradient-to-r from-transparent via-silver/20 to-transparent" />
 
