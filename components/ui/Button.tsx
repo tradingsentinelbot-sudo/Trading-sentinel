@@ -29,8 +29,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === "md" && "px-6 py-3 text-[15px]",
           size === "lg" && "px-8 py-4 text-base",
           variant === "primary" && [
-            "border border-white/55 bg-[linear-gradient(110deg,#8f98a4_0%,#d7dbe0_18%,#f1f3f5_34%,#aeb6c0_52%,#e4e7ea_70%,#8b949f_100%)] text-[#0B0D10] shadow-[inset_0_1px_0_rgba(255,255,255,0.72),inset_0_-1px_0_rgba(45,50,58,0.28),0_10px_34px_-18px_rgba(215,219,224,0.72)]",
-            "hover:brightness-[1.06] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.86),inset_0_-1px_0_rgba(45,50,58,0.22),0_14px_42px_-18px_rgba(215,219,224,0.9)] hover:-translate-y-0.5",
+            "border border-[#8f98a4]/70 bg-[linear-gradient(110deg,#4d5661_0%,#7d8793_18%,#aeb6c0_34%,#65707c_52%,#929ca7_70%,#46505b_100%)] text-[#0B0D10] shadow-[inset_0_1px_0_rgba(255,255,255,0.42),inset_0_-1px_0_rgba(20,24,29,0.42),0_8px_26px_-18px_rgba(127,137,150,0.48)]",
+            "hover:brightness-[1.08] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.58),inset_0_-1px_0_rgba(20,24,29,0.34),0_12px_32px_-18px_rgba(127,137,150,0.64)] hover:-translate-y-0.5",
             "active:translate-y-0",
           ],
           variant === "secondary" && [
