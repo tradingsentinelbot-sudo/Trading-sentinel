@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const ASSETS = {
+  environment: "/hero-composed/environment.png",
   hero: "/hero-composed/hero-core.png",
   foregroundTop: "/hero-composed/foreground-top.png",
   midground: "/hero-composed/midground.png",
@@ -24,18 +25,14 @@ type Layer = {
 };
 
 const LAYERS: Layer[] = [
-  // Background: rare, small fragments. They establish the distant field.
-  { key: "backgroundFragments", depth: 0.10, width: 0.14, x: 0.86, y: 0.25, driftX: 5, driftY: 2, rotation: -0.006 },
-  // Atmospheric dust sits behind the sculpture, not as a second object cluster.
-  { key: "dust", depth: 0.06, width: 0.40, x: 0.78, y: 0.52, driftX: 4, driftY: 2, rotation: 0 },
-  // Midground: a small number of clearly separated masses.
-  { key: "midground", depth: 0.24, width: 0.15, x: 0.88, y: 0.47, driftX: 9, driftY: 4, rotation: 0.008 },
-  { key: "foregroundTop", depth: 0.38, width: 0.15, x: 0.90, y: 0.18, driftX: 12, driftY: 5, rotation: -0.008 },
-  // Lower foreground creates a visual base and frames the hero instead of competing with it.
-  { key: "foregroundBottom", depth: 0.48, width: 0.22, x: 0.24, y: 0.84, driftX: 16, driftY: 7, rotation: 0.006 },
-  { key: "foregroundLower", depth: 0.56, width: 0.15, x: 0.82, y: 0.88, driftX: 20, driftY: 8, rotation: -0.006 },
-  // Core: deliberately smaller and further away than the previous pass.
-  { key: "hero", depth: 1, width: 0.29, x: 0.78, y: 0.40, driftX: 24, driftY: 10, rotation: 0.003 },
+  // Distant fragments: sparse and small, subordinate to the environment.
+  { key: "backgroundFragments", depth: 0.10, width: 0.10, x: 0.84, y: 0.28, driftX: 3, driftY: 1.5, rotation: -0.004 },
+  { key: "midground", depth: 0.22, width: 0.11, x: 0.88, y: 0.48, driftX: 5, driftY: 2, rotation: 0.005 },
+  { key: "foregroundTop", depth: 0.34, width: 0.10, x: 0.92, y: 0.20, driftX: 7, driftY: 3, rotation: -0.005 },
+  { key: "foregroundBottom", depth: 0.44, width: 0.15, x: 0.22, y: 0.84, driftX: 9, driftY: 4, rotation: 0.004 },
+  { key: "foregroundLower", depth: 0.50, width: 0.10, x: 0.82, y: 0.86, driftX: 11, driftY: 4, rotation: -0.004 },
+  // The core is larger again, but remains embedded in the environment.
+  { key: "hero", depth: 1, width: 0.40, x: 0.76, y: 0.39, driftX: 15, driftY: 6, rotation: 0.002 },
 ];
 
 function loadImage(src: string) {
@@ -64,15 +61,6 @@ export function SceneCanvas() {
     let scrollProgress = 0;
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     const images = new Map<keyof typeof ASSETS, HTMLImageElement>();
-    const particles = Array.from({ length: 92 }, (_, index) => ({
-      x: (index * 47.13) % 1,
-      y: (index * 83.71) % 1,
-      size: 0.7 + (index % 4) * 0.55,
-      depth: 0.15 + ((index * 17) % 100) / 100,
-      phase: index * 1.73,
-      speed: 0.08 + (index % 5) * 0.018,
-    }));
-
     const resize = () => {
       width = window.innerWidth;
       height = canvas.parentElement?.clientHeight || window.innerHeight;
@@ -99,6 +87,18 @@ export function SceneCanvas() {
       pointer.ty = (event.clientY / Math.max(1, height) - 0.5) * 2;
     };
 
+    const drawEnvironment = (image: HTMLImageElement) => {
+      const scale = Math.max(width / image.width, height / image.height);
+      const drawWidth = image.width * scale;
+      const drawHeight = image.height * scale;
+      const x = (width - drawWidth) / 2;
+      const y = (height - drawHeight) / 2;
+      context.save();
+      context.globalAlpha = 0.88;
+      context.drawImage(image, x, y, drawWidth, drawHeight);
+      context.restore();
+    };
+
     const drawImageLayer = (image: HTMLImageElement, layer: Layer, time: number) => {
       const mobile = width < 768;
       const baseWidth = width * (mobile ? Math.min(0.86, layer.width * 1.32) : layer.width);
@@ -117,8 +117,7 @@ export function SceneCanvas() {
       context.save();
       context.translate(x + drawWidth / 2, y + drawHeight / 2);
       context.rotate(layer.rotation + pointer.x * 0.003 * layer.depth);
-      const sceneFade = Math.max(0, 1 - Math.max(0, scrollProgress - 0.18) / 0.72);
-      context.globalAlpha = (layer.key === "hero" ? 0.84 : 0.42 + layer.depth * 0.26) * sceneFade;
+      context.globalAlpha = layer.key === "hero" ? 0.90 : 0.30 + layer.depth * 0.20;
       context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
       context.restore();
     };
@@ -129,30 +128,13 @@ export function SceneCanvas() {
       pointer.y += (pointer.ty - pointer.y) * 0.035;
       context.clearRect(0, 0, width, height);
 
-      // A very soft spatial haze preserves the sense of air between depth planes.
-      const haze = context.createRadialGradient(width * 0.66, height * 0.42, 0, width * 0.66, height * 0.42, Math.max(width, height) * 0.72);
-      haze.addColorStop(0, "rgba(160, 166, 174, 0.055)");
-      haze.addColorStop(0.48, "rgba(90, 98, 108, 0.025)");
-      haze.addColorStop(1, "rgba(0, 0, 0, 0)");
-      context.fillStyle = haze;
-      context.fillRect(0, 0, width, height);
+      const environment = images.get("environment");
+      if (environment) drawEnvironment(environment);
 
+      // The asset layers are embedded in the same environment, not floating over an empty canvas.
       for (const layer of LAYERS) {
         const image = images.get(layer.key);
         if (image) drawImageLayer(image, layer, time);
-      }
-
-      // Independent micro-particles: always moving, visible but not decorative noise.
-      for (const particle of particles) {
-        const drift = Math.sin(time * 0.001 * particle.speed + particle.phase);
-        const x = particle.x * width + drift * 18 * particle.depth + pointer.x * 8 * particle.depth;
-        const y = particle.y * height + Math.cos(time * 0.0008 * particle.speed + particle.phase) * 12 * particle.depth + pointer.y * -5 * particle.depth;
-        const alpha = 0.18 + (Math.sin(time * 0.001 + particle.phase) + 1) * 0.11;
-        context.beginPath();
-        context.fillStyle = `rgba(199, 204, 212, ${alpha})`;
-        context.shadowBlur = 0;
-        context.arc(x, y, particle.size, 0, Math.PI * 2);
-        context.fill();
       }
 
       frame = requestAnimationFrame(render);
