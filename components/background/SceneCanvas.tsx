@@ -25,13 +25,14 @@ type Layer = {
 };
 
 const LAYERS: Layer[] = [
-  { key: "backgroundFragments", depth: 0.10, width: 0.08, x: 0.80, y: 0.28, driftX: 2, driftY: 1, rotation: -0.003 },
-  { key: "midground", depth: 0.20, width: 0.09, x: 0.84, y: 0.50, driftX: 3, driftY: 1.5, rotation: 0.003 },
-  { key: "foregroundTop", depth: 0.28, width: 0.08, x: 0.90, y: 0.22, driftX: 4, driftY: 2, rotation: -0.003 },
-  { key: "foregroundBottom", depth: 0.34, width: 0.12, x: 0.20, y: 0.84, driftX: 5, driftY: 2, rotation: 0.003 },
-  { key: "foregroundLower", depth: 0.38, width: 0.08, x: 0.82, y: 0.82, driftX: 6, driftY: 2, rotation: -0.003 },
-  // The monolith remains centered in the environment. Desktop is intentionally ~10% smaller.
-  { key: "hero", depth: 1, width: 0.36, x: 0.50, y: 0.43, driftX: 9, driftY: 4, rotation: 0.0015 },
+  // Distant fragments: sparse and small, subordinate to the environment.
+  { key: "backgroundFragments", depth: 0.10, width: 0.10, x: 0.84, y: 0.28, driftX: 3, driftY: 1.5, rotation: -0.004 },
+  { key: "midground", depth: 0.22, width: 0.11, x: 0.88, y: 0.48, driftX: 5, driftY: 2, rotation: 0.005 },
+  { key: "foregroundTop", depth: 0.34, width: 0.10, x: 0.92, y: 0.20, driftX: 7, driftY: 3, rotation: -0.005 },
+  { key: "foregroundBottom", depth: 0.44, width: 0.15, x: 0.22, y: 0.84, driftX: 9, driftY: 4, rotation: 0.004 },
+  { key: "foregroundLower", depth: 0.50, width: 0.10, x: 0.82, y: 0.86, driftX: 11, driftY: 4, rotation: -0.004 },
+  // The core is larger again, but remains embedded in the environment.
+  { key: "hero", depth: 1, width: 0.36, x: 0.76, y: 0.39, driftX: 15, driftY: 6, rotation: 0.002 },
 ];
 
 function loadImage(src: string) {
@@ -60,7 +61,6 @@ export function SceneCanvas() {
     let scrollProgress = 0;
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     const images = new Map<keyof typeof ASSETS, HTMLImageElement>();
-
     const resize = () => {
       width = window.innerWidth;
       height = canvas.parentElement?.clientHeight || window.innerHeight;
@@ -78,7 +78,8 @@ export function SceneCanvas() {
       const host = canvas.parentElement;
       if (!host) return;
       const rect = host.getBoundingClientRect();
-      scrollProgress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+      const travel = Math.max(1, rect.height - window.innerHeight);
+      scrollProgress = Math.min(1, Math.max(0, -rect.top / travel));
     };
 
     const onPointer = (event: PointerEvent) => {
@@ -86,14 +87,12 @@ export function SceneCanvas() {
       pointer.ty = (event.clientY / Math.max(1, height) - 0.5) * 2;
     };
 
-    const drawEnvironment = (image: HTMLImageElement, time: number) => {
-      const scale = Math.max(width / image.width, height / image.height) * 1.025;
+    const drawEnvironment = (image: HTMLImageElement) => {
+      const scale = Math.max(width / image.width, height / image.height);
       const drawWidth = image.width * scale;
       const drawHeight = image.height * scale;
-      const cameraX = pointer.x * 4 + Math.sin(time * 0.00012) * 1.5 + scrollProgress * 5;
-      const cameraY = pointer.y * -3 + Math.cos(time * 0.00010) * 1.2 + scrollProgress * 2;
-      const x = (width - drawWidth) / 2 + cameraX;
-      const y = (height - drawHeight) / 2 + cameraY;
+      const x = (width - drawWidth) / 2;
+      const y = (height - drawHeight) / 2;
       context.save();
       context.globalAlpha = 0.88;
       context.drawImage(image, x, y, drawWidth, drawHeight);
@@ -102,23 +101,23 @@ export function SceneCanvas() {
 
     const drawImageLayer = (image: HTMLImageElement, layer: Layer, time: number) => {
       const mobile = width < 768;
-      const baseWidth = width * (mobile ? Math.min(0.86, layer.width * 1.47) : layer.width);
+      const baseWidth = width * (mobile ? Math.min(0.86, layer.width * 1.32) : layer.width);
       const ratio = image.height / image.width;
       const drawWidth = baseWidth;
       const drawHeight = drawWidth * ratio;
       const scrollX = (scrollProgress - 0.35) * layer.driftX;
       const scrollY = (scrollProgress - 0.35) * layer.driftY;
-      const presenceX = Math.sin(time * (0.00014 + layer.depth * 0.00006) + layer.depth * 4) * 2.4 * layer.depth;
-      const presenceY = Math.cos(time * (0.00012 + layer.depth * 0.00005) + layer.depth * 3) * 1.8 * layer.depth;
-      const pointerX = pointer.x * 10 * layer.depth;
-      const pointerY = pointer.y * -7 * layer.depth;
+      const presenceX = Math.sin(time * (0.00018 + layer.depth * 0.00008) + layer.depth * 4) * 4 * layer.depth;
+      const presenceY = Math.cos(time * (0.00016 + layer.depth * 0.00006) + layer.depth * 3) * 3 * layer.depth;
+      const pointerX = pointer.x * 18 * layer.depth;
+      const pointerY = pointer.y * -12 * layer.depth;
       const x = width * (mobile ? 0.52 + (layer.x - 0.5) * 0.65 : layer.x) - drawWidth / 2 + scrollX + presenceX + pointerX;
       const y = height * (mobile ? 0.48 + (layer.y - 0.5) * 0.68 : layer.y) - drawHeight / 2 + scrollY + presenceY + pointerY;
 
       context.save();
       context.translate(x + drawWidth / 2, y + drawHeight / 2);
-      context.rotate(layer.rotation + pointer.x * 0.002 * layer.depth);
-      context.globalAlpha = layer.key === "hero" ? 0.88 : 0.18 + layer.depth * 0.16;
+      context.rotate(layer.rotation + pointer.x * 0.003 * layer.depth);
+      context.globalAlpha = layer.key === "hero" ? 0.90 : 0.30 + layer.depth * 0.20;
       context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
       context.restore();
     };
@@ -130,11 +129,14 @@ export function SceneCanvas() {
       context.clearRect(0, 0, width, height);
 
       const environment = images.get("environment");
-      if (environment) drawEnvironment(environment, time);
+      if (environment) drawEnvironment(environment);
+
+      // The asset layers are embedded in the same environment, not floating over an empty canvas.
       for (const layer of LAYERS) {
         const image = images.get(layer.key);
         if (image) drawImageLayer(image, layer, time);
       }
+
       frame = requestAnimationFrame(render);
     };
 
@@ -162,5 +164,11 @@ export function SceneCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 z-0 h-full w-full" aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+      aria-hidden="true"
+    />
+  );
 }

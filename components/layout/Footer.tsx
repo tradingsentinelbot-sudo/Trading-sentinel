@@ -6,6 +6,7 @@ const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Risk Disclosure", href: "/risk-disclosure" },
   { label: "FAQ Tecniche", href: "/faq-tecniche" },
+  { label: "Documentazione", href: "/documentazione" },
 ];
 
 export function Footer() {

@@ -28,11 +28,11 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(8,9,11,0.18)_0%,rgba(8,9,11,0.10)_36%,rgba(8,9,11,0.32)_58%,rgba(8,9,11,0.72)_78%,rgba(8,9,11,0.98)_100%)]"
       />
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(128,134,142,0.16),rgba(92,98,106,0.12)_52%,rgba(32,37,44,0.18))]" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[92%] bg-[linear-gradient(180deg,transparent_0%,rgba(42,48,56,0.06)_32%,rgba(42,48,56,0.24)_58%,rgba(8,9,11,0.74)_82%,#08090B_100%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[68%] bg-gradient-to-t from-obsidian via-obsidian/82 to-transparent"
       />
+      <div aria-hidden className="pointer-events-none absolute left-[8%] top-[28%] -z-10 h-px w-[34%] bg-gradient-to-r from-transparent via-silver/20 to-transparent" />
 
       <div className="container-sentinel relative flex min-h-[calc(min(900px,100svh)-7rem)] items-center">
         <motion.div

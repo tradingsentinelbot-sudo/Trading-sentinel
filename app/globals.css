@@ -10,9 +10,9 @@
   body {
     @apply bg-obsidian text-ink font-body antialiased;
     background-image:
-      radial-gradient(70% 52% at 72% -10%, rgba(199,204,212,0.025), transparent 62%),
-      radial-gradient(55% 45% at 18% 38%, rgba(214,168,74,0.020), transparent 68%),
-      linear-gradient(180deg, #050608 0%, #07080A 48%, #050608 100%);
+      radial-gradient(70% 52% at 72% -10%, rgba(199,204,212,0.035), transparent 62%),
+      radial-gradient(55% 45% at 18% 38%, rgba(214,168,74,0.028), transparent 68%),
+      linear-gradient(180deg, #060709 0%, #08090B 48%, #060709 100%);
   }
 
   ::selection {
@@ -48,27 +48,6 @@
       0 20px 64px -36px rgba(0,0,0,0.92);
   }
 
-
-  .ambient-rock-field {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    overflow: hidden;
-    opacity: 0.22;
-  }
-
-  .ambient-rock {
-    position: absolute;
-    height: auto;
-    object-fit: contain;
-    filter: saturate(0.72) contrast(0.92);
-    will-change: transform;
-  }
-
-  .ambient-rock-a { width: clamp(90px, 9vw, 150px); left: 7%; top: 28%; transform: translate3d(0, 0, 0); }
-  .ambient-rock-b { width: clamp(100px, 11vw, 180px); right: 7%; top: 58%; transform: translate3d(0, 0, 0); }
-  .ambient-rock-c { width: clamp(150px, 16vw, 250px); left: 13%; bottom: 11%; transform: translate3d(0, 0, 0); }
 
   .ambient-reading-layer {
     position: fixed;
