@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LegalPageLayout, LegalSection, LegalList } from "@/components/legal/LegalPageLayout";
 
 export const metadata: Metadata = {
-  title: "Documentazione — Trading Sentinel",
+  title: "Manuali Utente — Trading Sentinel",
   description: "Manuale utente di Trading Sentinel Pro.",
 };
 
@@ -16,7 +16,7 @@ function Command({ children }: { children: React.ReactNode }) {
 
 export default function DocumentationPage() {
   return (
-    <LegalPageLayout title="Documentazione" lastUpdated="22 luglio 2026">
+    <LegalPageLayout title="Manuali Utente" lastUpdated="22 luglio 2026">
       <LegalSection title="Manuale utente · Versione Pro">
         <p>Trading Sentinel Pro è la versione avanzata del sistema di monitoraggio Telegram per XAUUSD. Mantiene il flusso operativo del Basic e aggiunge maggiore capacità di gestione, configurazione e controllo.</p>
         <p>Il Pro supporta fino a 5 trade simultanei, livelli personalizzabili per ogni posizione, status individuali, storico delle notifiche automatiche e report operativo.</p>

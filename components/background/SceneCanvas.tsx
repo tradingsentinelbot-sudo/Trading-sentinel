@@ -32,7 +32,7 @@ const LAYERS: Layer[] = [
   { key: "foregroundBottom", depth: 0.44, width: 0.15, x: 0.22, y: 0.84, driftX: 9, driftY: 4, rotation: 0.004 },
   { key: "foregroundLower", depth: 0.50, width: 0.10, x: 0.82, y: 0.86, driftX: 11, driftY: 4, rotation: -0.004 },
   // The core is larger again, but remains embedded in the environment.
-  { key: "hero", depth: 1, width: 0.36, x: 0.76, y: 0.39, driftX: 15, driftY: 6, rotation: 0.002 },
+  { key: "hero", depth: 1, width: 0.364, x: 0.76, y: 0.39, driftX: 15, driftY: 6, rotation: 0.002 },
 ];
 
 function loadImage(src: string) {

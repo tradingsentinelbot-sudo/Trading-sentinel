@@ -55,9 +55,9 @@
     z-index: 2;
     pointer-events: none;
     background:
-      linear-gradient(180deg, rgba(128, 134, 142, 0.22), rgba(82, 88, 96, 0.17) 48%, rgba(42, 48, 56, 0.20)),
-      linear-gradient(180deg, rgba(166, 171, 178, 0.10), rgba(92, 98, 106, 0.08) 52%, rgba(32, 37, 44, 0.12)),
-      radial-gradient(70% 60% at 50% 42%, rgba(140, 146, 154, 0.08), transparent 70%);
+      linear-gradient(180deg, rgba(128, 134, 142, 0.29), rgba(82, 88, 96, 0.23) 48%, rgba(42, 48, 56, 0.27)),
+      linear-gradient(180deg, rgba(166, 171, 178, 0.14), rgba(92, 98, 106, 0.12) 52%, rgba(32, 37, 44, 0.16)),
+      radial-gradient(70% 60% at 50% 42%, rgba(140, 146, 154, 0.11), transparent 70%);
     mix-blend-mode: normal;
   }
 
