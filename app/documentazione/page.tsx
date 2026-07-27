@@ -3,7 +3,7 @@ import { LegalPageLayout, LegalSection, LegalList } from "@/components/legal/Leg
 
 export const metadata: Metadata = {
   title: "Manuali Utente — Trading Sentinel",
-  description: "Manuale utente di Trading Sentinel Pro.",
+  description: "Manuali utente di Trading Sentinel Basic e Pro.",
 };
 
 function Command({ children }: { children: React.ReactNode }) {
@@ -17,6 +17,88 @@ function Command({ children }: { children: React.ReactNode }) {
 export default function DocumentationPage() {
   return (
     <LegalPageLayout title="Manuali Utente" lastUpdated="22 luglio 2026">
+      <LegalSection title="Manuale utente · Versione Basic">
+        <p>Trading Sentinel Basic è un bot Telegram per il monitoraggio automatico delle posizioni su XAUUSD. Voi aprite e gestite la posizione sulla vostra piattaforma di trading; il bot mantiene il monitoraggio del trade e vi invia una notifica quando il prezzo attraversa i livelli definiti attraverso Entry e Stop Loss.</p>
+        <p>Il bot gira autonomamente sul server. Il telefono serve per ricevere e inviare i messaggi Telegram: non è necessario tenere aperta la piattaforma di trading.</p>
+      </LegalSection>
+
+      <LegalSection title="Basic · 1. Il flusso di utilizzo">
+        <LegalList items={[
+          "Avviate il bot.",
+          "Il bot comunica il prezzo attuale di XAUUSD e il numero di trade già attivi.",
+          "Aprite la posizione reale sulla vostra piattaforma di trading.",
+          "Registrate il trade nel bot con direzione, Entry e Stop Loss.",
+          "Trading Sentinel calcola automaticamente R e i livelli da monitorare.",
+          "Il bot controlla il prezzo automaticamente.",
+          "Quando il prezzo attraversa un livello, ricevete una notifica Telegram.",
+          "Quando chiudete la posizione reale, rimuovete il trade dal monitoraggio del bot.",
+        ]} />
+      </LegalSection>
+
+      <LegalSection title="Basic · 2. Registrare una posizione">
+        <Command>/long ENTRY STOP
+/short ENTRY STOP
+
+Esempio:
+/long 3320 3310</Command>
+        <p>Il bot calcola automaticamente R, cioè la distanza tra Entry e Stop Loss, e costruisce i livelli di monitoraggio.</p>
+        <p>Trading Sentinel non apre, modifica o chiude posizioni reali sulla vostra piattaforma. Il bot gestisce esclusivamente il proprio registro di monitoraggio.</p>
+      </LegalSection>
+
+      <LegalSection title="Basic · 3. Come funziona il monitoraggio">
+        <p>Con i livelli standard il bot monitora +0.3R, +0.7R, -0.3R e -0.7R.</p>
+        <p>Una notifica non viene inviata ad ogni controllo. Il bot notifica l&apos;attraversamento effettivo di un livello. Se il prezzo resta sopra o sotto un livello, non ricevete notifiche ripetute finché non avviene un nuovo attraversamento.</p>
+      </LegalSection>
+
+      <LegalSection title="Basic · 4. Gestire più posizioni">
+        <p>La versione Basic supporta fino a 3 trade contemporaneamente.</p>
+        <Command>/long /short — registra il trade 1.
+/long2 /short2 — registra il trade 2.
+/long3 /short3 — registra il trade 3.
+/status — mostra tutti i trade attivi.
+/close1 /close2 /close3 — rimuove il trade corrispondente.
+/closeall — rimuove tutti i trade dal monitoraggio.</Command>
+      </LegalSection>
+
+      <LegalSection title="Basic · 5. Mantenimento overnight">
+        <p>A mezzanotte il bot rimuove automaticamente dal proprio registro i trade che non hanno il mantenimento overnight attivo. Questo non chiude la posizione reale sulla piattaforma.</p>
+        <Command>/keep1 /keep2 /keep3 — mantiene il trade indicato nel registro durante la notte.
+/unkeep1 /unkeep2 /unkeep3 — disattiva il mantenimento overnight.
+/keepall — attiva il mantenimento overnight per tutti i trade.
+/unkeepall — disattiva il mantenimento overnight.</Command>
+      </LegalSection>
+
+      <LegalSection title="Basic · 6. Alert indipendenti dai trade">
+        <Command>/alertup PREZZO — notifica quando il prezzo supera il livello indicato.
+/alertdown PREZZO — notifica quando il prezzo scende sotto il livello indicato.
+/alertupoff — rimuove l&apos;alert UP.
+/alertdownoff — rimuove l&apos;alert DOWN.
+/alertoff — rimuove entrambi gli alert.
+/alertstatus — mostra gli alert attivi.</Command>
+      </LegalSection>
+
+      <LegalSection title="Basic · 7. Comandi di servizio">
+        <Command>/price — mostra il prezzo attuale di XAUUSD.
+/ping — verifica che il bot sia online.
+/version — mostra la versione del bot.</Command>
+      </LegalSection>
+
+      <LegalSection title="Basic · 8. Riavvio, connessione e dati">
+        <p>I trade registrati vengono riletti dal file dati al riavvio. Se la connessione internet viene temporaneamente persa, il ciclo di monitoraggio riprende ai controlli successivi. Le posizioni reali non vengono modificate dal bot.</p>
+      </LegalSection>
+
+      <LegalSection title="Basic · 9. Esempio di sessione">
+        <LegalList items={[
+          "Aprite una posizione long su XAUUSD.",
+          "Registrate: /long 3320 3310.",
+          "Il bot calcola R e i livelli.",
+          "Il prezzo viene controllato automaticamente.",
+          "Ricevete una notifica quando il prezzo attraversa un livello.",
+          "Se volete mantenere il trade overnight: /keep1.",
+          "Quando la posizione reale è chiusa: /close1.",
+        ]} />
+      </LegalSection>
+
       <LegalSection title="Manuale utente · Versione Pro">
         <p>Trading Sentinel Pro è la versione avanzata del sistema di monitoraggio Telegram per XAUUSD. Mantiene il flusso operativo del Basic e aggiunge maggiore capacità di gestione, configurazione e controllo.</p>
         <p>Il Pro supporta fino a 5 trade simultanei, livelli personalizzabili per ogni posizione, status individuali, storico delle notifiche automatiche e report operativo.</p>

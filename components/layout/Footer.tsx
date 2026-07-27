@@ -7,6 +7,7 @@ const LEGAL_LINKS = [
   { label: "Risk Disclosure", href: "/risk-disclosure" },
   { label: "FAQ Tecniche", href: "/faq-tecniche" },
   { label: "Manuali Utente", href: "/documentazione" },
+  { label: "Trust and Verification", href: "/trust-and-verification" },
 ];
 
 export function Footer() {

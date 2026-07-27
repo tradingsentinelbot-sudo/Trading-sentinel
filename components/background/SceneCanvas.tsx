@@ -59,6 +59,7 @@ export function SceneCanvas() {
     let height = 0;
     let dpr = 1;
     let scrollProgress = 0;
+    let sceneFadeStart = 0;
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     const images = new Map<keyof typeof ASSETS, HTMLImageElement>();
     const resize = () => {
@@ -94,7 +95,9 @@ export function SceneCanvas() {
       const x = (width - drawWidth) / 2;
       const y = (height - drawHeight) / 2;
       context.save();
-      context.globalAlpha = 0.88;
+      const fade = sceneFadeStart ? Math.min(1, Math.max(0, (performance.now() - sceneFadeStart) / 1100)) : 0;
+      const eased = 1 - Math.pow(1 - fade, 3);
+      context.globalAlpha = 0.88 * eased;
       context.drawImage(image, x, y, drawWidth, drawHeight);
       context.restore();
     };
@@ -117,7 +120,9 @@ export function SceneCanvas() {
       context.save();
       context.translate(x + drawWidth / 2, y + drawHeight / 2);
       context.rotate(layer.rotation + pointer.x * 0.003 * layer.depth);
-      context.globalAlpha = layer.key === "hero" ? 0.90 : 0.30 + layer.depth * 0.20;
+      const fade = sceneFadeStart ? Math.min(1, Math.max(0, (performance.now() - sceneFadeStart) / 1100)) : 0;
+      const eased = 1 - Math.pow(1 - fade, 3);
+      context.globalAlpha = (layer.key === "hero" ? 0.90 : 0.30 + layer.depth * 0.20) * eased;
       context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
       context.restore();
     };
@@ -149,6 +154,7 @@ export function SceneCanvas() {
     Promise.all(Object.entries(ASSETS).map(async ([key, src]) => [key, await loadImage(src)] as const))
       .then((loaded) => {
         loaded.forEach(([key, image]) => images.set(key as keyof typeof ASSETS, image));
+        sceneFadeStart = performance.now();
         frame = requestAnimationFrame(render);
       })
       .catch(() => {
